@@ -1,35 +1,78 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+
+const { Header, Content, Footer, Sider } = Layout;
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
+
+const items: MenuItem[] = [
+  getItem('Menu 1', '1', <PieChartOutlined />),
+  getItem('Menu 2', '2', <DesktopOutlined />),
+  getItem('Menu 3 Group', 'sub1', <UserOutlined />, [
+    getItem('Submenu 3.1', '3'),
+    getItem('Submenu 3.2', '4'),
+  ]),
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <div className="demo-logo-vertical" style={{ padding: '16px', color: 'white', display: 'inline-flex', gap: '1rem' }}>
+          <div style={{ fontSize: '2rem' }}>MT</div>
+          <div style={{ display: collapsed ? 'none' : 'flex', flexDirection: 'column', lineHeight: 1, gap: '0.2rem', alignItems: 'flex-end', justifyContent: 'center' }}>
+            {!collapsed && <div>Monitoring Tool</div>}
+            <div style={{ fontSize: '0.7rem', color: '#ccc' }}>v0.0.0</div>
+          </div>
+        </div>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Content style={{ margin: '0 16px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'Parent' }, { title: 'Child' }]} />
+          <div
+            style={{
+              padding: 24,
+              minHeight: 360,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            TODO
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Monitoring Tool ©{new Date().getFullYear()}
+        </Footer>
+      </Layout>
+    </Layout>
+  );
 }
 
 export default App
