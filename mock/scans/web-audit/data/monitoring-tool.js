@@ -1,15 +1,15 @@
 import { defineMockData } from 'vite-plugin-mock-dev-server';
 
-export default defineMockData('web-audit-report', {
+export default defineMockData('web-audit--monitoring-tool', {
   auditReportVersion: 2,
   vulnerabilities: {},
   'metadata': {
     'vulnerabilities': {
-      'info': 10,
+      'info': 0,
       'low': 0,
       'moderate': 0,
-      'high': 3,
-      'critical': 1,
+      'high': 0,
+      'critical': 0,
       'total': 0
     },
     'dependencies': {
