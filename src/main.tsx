@@ -11,10 +11,10 @@ import {
   createRouter,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { ApplicationLayout } from './components/ApplicationLayout';
+import { ApplicationLayout } from './components/ApplicationLayout/ApplicationLayout';
 import reportWebVitals from './reportWebVitals';
-import Menu2 from './routes/RouteMenu2/RouteMenu2';
 import { getContext } from './integrations/react-query-context';
+import WebAuditRoute from './routes/WebAuditRoute/WebAuditRoute';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -33,7 +33,7 @@ const indexRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
-  Menu2(rootRoute),
+  WebAuditRoute(rootRoute),
 ]);
 
 const TanStackQueryProviderContext = getContext();

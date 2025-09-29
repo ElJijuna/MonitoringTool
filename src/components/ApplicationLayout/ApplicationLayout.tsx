@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Breadcrumb, Layout, theme } from 'antd';
-import { SideBarMenu } from '../components/SideBarMenu/SideBarMenu';
-import { ApplicationName } from '../components/SideBarMenu/ApplicationName/ApplicationName';
-import { ApplicationFooter } from '../components/ApplicationFooter/ApplicationFooter';
+import { SideBarMenu } from '../SideBarMenu/SideBarMenu';
+import { ApplicationName } from '../SideBarMenu/ApplicationName/ApplicationName';
+import { ApplicationFooter } from '../ApplicationFooter/ApplicationFooter';
 import type { FC } from 'react';
 import { Outlet } from '@tanstack/react-router';
 
