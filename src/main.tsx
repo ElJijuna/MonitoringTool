@@ -16,6 +16,7 @@ import reportWebVitals from './reportWebVitals';
 import { getContext } from './integrations/react-query-context';
 import WebAuditRoute from './routes/WebAuditRoute/WebAuditRoute';
 import ApplicationsRoute from './routes/ApplicationsRoute/ApplicationsRoute';
+import ApplicationRoute from './routes/ApplicationRoute/ApplicationRoute';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -35,6 +36,7 @@ const indexRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   ApplicationsRoute(rootRoute),
+  ApplicationRoute(rootRoute),
   WebAuditRoute(rootRoute),
 ]);
 
