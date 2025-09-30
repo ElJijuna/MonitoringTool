@@ -12,7 +12,7 @@ export const SideBarMenu: FC = () => {
   const navigate = useNavigate();
 
   return <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={[
-    { key: 'menu1', icon: <PieChartOutlined />, label: 'Menu 1', onClick: () => { navigate({ to: '/', search: true }); } },
+    { key: 'Applications', icon: <PieChartOutlined />, label: 'Applications', onClick: () => { navigate({ to: '/applications', search: true }); } },
     { key: 'WebAudit', icon: <DesktopOutlined />, label: 'Web Audit', onClick: () => { navigate({ to: parseWebAuditRoutePath('react-base-app'), search: true }); } },
     {
       key: 'submenu3',
