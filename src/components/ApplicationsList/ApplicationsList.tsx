@@ -11,9 +11,9 @@ const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   </Space>
 );
 
-export interface ApplicationsProps extends PropsWithChildren { }
+export interface ApplicationsListProps extends PropsWithChildren { }
 
-export const Applications: FC<ApplicationsProps> = ({ children }: ApplicationsProps): ReactElement => {
+export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: ApplicationsListProps): ReactElement => {
   const { data: applications, isPending } = useApplications({ application: '' });
 
   if (isPending) {

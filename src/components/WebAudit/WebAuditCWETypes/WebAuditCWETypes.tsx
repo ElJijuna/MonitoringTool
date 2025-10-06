@@ -1,4 +1,4 @@
-import { type FC, type PropsWithChildren, type ReactElement } from "react";
+import { type FC, type ReactElement } from "react";
 import { useWebAuditCWE } from "../hooks/useWebAuditCWE";
 
 export const WebAuditCWETypes: FC = (): ReactElement => {

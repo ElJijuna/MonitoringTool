@@ -17,7 +17,7 @@ interface WebAuditReportMetadata {
   };
 }
 
-interface VulnerabilityVia {
+export interface VulnerabilityVia {
   source: string | number;
   name?: string;
   dependency?: string;
@@ -42,7 +42,7 @@ export interface Vulnerabilities {
   effects: string[];
   range: string;
   nodes: string[];
-  fix_available: boolean | 'maybe';
+  fixAvailable: boolean | 'maybe';
 }
 
 export interface WebAuditReportResponse {
@@ -53,7 +53,7 @@ export interface WebAuditReportResponse {
 
 export class WebAuditReport {
   readonly version: number;
-  readonly vulnerabilities = [];
+  readonly vulnerabilities: Record<string, Vulnerabilities> = {};
   readonly metadata: WebAuditReportMetadata;
 
   constructor(application: WebAuditReportResponse) {
