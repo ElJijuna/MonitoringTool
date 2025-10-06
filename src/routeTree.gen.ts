@@ -8,13 +8,13 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/__root'
-import { Route as UsersRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/users'
-import { Route as ApplicationsRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications'
-import { Route as ApplicationsIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/index'
-import { Route as ApplicationsAppIdRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId'
-import { Route as ApplicationsAppIdIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/index'
-import { Route as ApplicationsAppIdScansWebAuditRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit'
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as UsersRouteImport } from './routes/users'
+import { Route as ApplicationsRouteImport } from './routes/applications'
+import { Route as ApplicationsIndexRouteImport } from './routes/applications/index'
+import { Route as ApplicationsAppIdRouteImport } from './routes/applications/$appId'
+import { Route as ApplicationsAppIdIndexRouteImport } from './routes/applications/$appId/index'
+import { Route as ApplicationsAppIdScansWebAuditRouteImport } from './routes/applications/$appId/scans/web-audit'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
