@@ -6,7 +6,7 @@ import { severityColor } from '../../../utils/severity/severity-color';
 
 export interface WebAuditPieProps extends PropsWithChildren {}
 
-export const WebAuditPie: FC<WebAuditPieProps> = ({ children }): ReactElement => {
+export const WebAuditPie: FC<WebAuditPieProps> = (): ReactElement => {
   const { data: report, isPending } = useWebAuditReport({ application: 'react-base-app' });
   const data = useMemo(() => [{ type: severityText.critical, value: report?.metadata.vulnerabilities.critical ?? 0 }, { type: severityText.high, value: report?.metadata.vulnerabilities.high ?? 0 }, { type: severityText.moderate, value: report?.metadata.vulnerabilities.moderate ?? 0 }, { type: severityText.low, value: report?.metadata.vulnerabilities.low ?? 0 }, { type: severityText.info, value: report?.metadata.vulnerabilities.info ?? 0 }], [report]);
   const config = useMemo(() => ({

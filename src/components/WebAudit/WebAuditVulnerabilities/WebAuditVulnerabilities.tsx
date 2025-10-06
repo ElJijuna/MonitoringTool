@@ -9,8 +9,8 @@ import { severityText } from '../../../utils/severity/severity-text';
 interface DataType {
   key: string;
   name: string;
-  severity: string;
-  fixAvailable: string;
+  severity: unknown;
+  fixAvailable: boolean | 'maybe';
   range: string;
 }
 
@@ -23,8 +23,6 @@ export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ chil
   if (isPending) {
     return <div>Loading...</div>;
   }
-
-  console.log(vulnerabilities)
 
   return (
     <div>
