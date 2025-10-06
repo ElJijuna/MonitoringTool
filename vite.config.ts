@@ -3,8 +3,10 @@ import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'node:path';
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+  base: '/MonitoringTool/',
   plugins: [
     tanstackRouter({
       target: 'react',
@@ -16,6 +18,14 @@ export default defineConfig({
       log: 'debug',
       cors: false,
     }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: resolve(__dirname, 'dist/*'),
+          dest: resolve(__dirname, 'docs')
+        }
+      ]
+    })
   ],
   resolve: {
     alias: {
