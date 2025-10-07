@@ -9,7 +9,7 @@ const ApplicationIndex: FC = (): ReactElement => {
   return (
     <div>
       <div>
-        <h3>Detalles de pepe</h3>
+        <h3>Detalles de app</h3>
         <Link to={`/applications/${appId}/scans/web-audit`}>Ir a Web Audit</Link>
       </div>
     </div>

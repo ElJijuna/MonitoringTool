@@ -14,10 +14,12 @@ interface DataType {
   range: string;
 }
 
-export interface WebAuditVulnerabilitiesProps extends PropsWithChildren {}
+export interface WebAuditVulnerabilitiesProps extends PropsWithChildren {
+  application: string;
+}
 
-export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ children }): ReactElement => {
-  const { data, isPending } = useWebAuditReport({ application: 'react-base-app' });
+export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ children, application }): ReactElement => {
+  const { data, isPending } = useWebAuditReport({ application });
   const vulnerabilities = useMemo(() => Object.entries(data?.vulnerabilities ?? {}).map(([key, value]) => ({ key, ...value })), [data]);
 
   if (isPending) {
