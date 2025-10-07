@@ -24,8 +24,7 @@ export default defineConfig(({ mode }) => {
         cors: false,
       }),
       githubPagesSpa({
-        // Options are optional
-        verbose: true, // Set to false to disable console logs
+        verbose: true,
       }),
       viteStaticCopy({
         targets: [
