@@ -3,12 +3,16 @@ import { useMemo, type FC, type PropsWithChildren, type ReactElement } from 'rea
 import { useWebAuditReport } from '../../../proxy-queries/useWebAuditReport';
 import { severityText } from '../../../utils/severity/severity-text';
 import { severityColor } from '../../../utils/severity/severity-color';
+import { theme } from 'antd';
 
 export interface WebAuditPieProps extends PropsWithChildren {
   application: string;
 }
 
 export const WebAuditPie: FC<WebAuditPieProps> = ({ application }): ReactElement => {
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   const { data: report, isPending } = useWebAuditReport({ application });
   const data = useMemo(() => [{ type: severityText.critical, value: report?.metadata.vulnerabilities.critical ?? 0 }, { type: severityText.high, value: report?.metadata.vulnerabilities.high ?? 0 }, { type: severityText.moderate, value: report?.metadata.vulnerabilities.moderate ?? 0 }, { type: severityText.low, value: report?.metadata.vulnerabilities.low ?? 0 }, { type: severityText.info, value: report?.metadata.vulnerabilities.info ?? 0 }], [report]);
   const config = useMemo(() => ({
@@ -42,8 +46,8 @@ export const WebAuditPie: FC<WebAuditPieProps> = ({ application }): ReactElement
         },
       },
     ],
-    scale: { 
-      color: { 
+    scale: {
+      color: {
         range: [
           severityColor.critical,
           severityColor.high,
@@ -61,5 +65,14 @@ export const WebAuditPie: FC<WebAuditPieProps> = ({ application }): ReactElement
     return <div>Loading...</div>;
   }
 
-  return <Pie {...config} />;
+  return (
+    <div
+      style={{
+        padding: 10,
+        minHeight: 360,
+        background: colorBgContainer,
+        borderRadius: borderRadiusLG,
+      }}
+    ><Pie {...config} /></div>
+  );
 };

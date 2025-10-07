@@ -5,6 +5,7 @@ import { Content, Header, Footer } from 'antd/es/layout/layout';
 import theme from 'antd/es/theme';
 import Title from 'antd/es/typography/Title';
 import Text from 'antd/es/typography/Text';
+import { FaReact } from 'react-icons/fa6';
 import type { FC, ReactElement } from 'react';
 
 const Application: FC = (): ReactElement => {
@@ -13,13 +14,21 @@ const Application: FC = (): ReactElement => {
     from: undefined
   });
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
 
   return (
     <Layout>
-      <Header style={{ background: colorBgContainer, padding: '0 16px' }}>
-        <Flex align="center" style={{ height: '100%' }}>
+      <Header style={{
+        background: colorBgContainer, padding: '0 16px', position: 'sticky',
+        top: 0,
+        zIndex: 1,
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <Flex align='center' style={{ height: '100%', gap: 10 }}>
+          <FaReact size={46} />
           <Flex vertical>
             <Title level={3} style={{ margin: 0 }}>{appId}</Title>
             <Text>Description app</Text>
@@ -28,16 +37,7 @@ const Application: FC = (): ReactElement => {
       </Header>
       <Content style={{ padding: '0 16px' }}>
         <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'Parent' }, { title: 'Child' }]} />
-        <div
-          style={{
-            padding: 24,
-            minHeight: 360,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <Outlet />
-        </div>
+        <Outlet />
       </Content>
       <Footer />
     </Layout>

@@ -2,7 +2,7 @@ import { useMemo, type FC, type PropsWithChildren, type ReactElement } from 'rea
 import { useWebAuditReport } from '../../../proxy-queries/useWebAuditReport';
 import Table from 'antd/es/table/Table';
 import Column from 'antd/es/table/Column';
-import { Col, Tag } from 'antd';
+import { Col, Tag, theme } from 'antd';
 import { severityColor } from '../../../utils/severity/severity-color';
 import { severityText } from '../../../utils/severity/severity-text';
 
@@ -21,13 +21,23 @@ export interface WebAuditVulnerabilitiesProps extends PropsWithChildren {
 export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ children, application }): ReactElement => {
   const { data, isPending } = useWebAuditReport({ application });
   const vulnerabilities = useMemo(() => Object.entries(data?.vulnerabilities ?? {}).map(([key, value]) => ({ key, ...value })), [data]);
-
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+  
   if (isPending) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <div
+      style={{
+        padding: 10,
+        minHeight: 360,
+        background: colorBgContainer,
+        borderRadius: borderRadiusLG,
+      }}
+    >
       <Table<DataType> dataSource={vulnerabilities}>
         <Column title="Name" dataIndex="name" key="name" />
         <Column title="Severity" dataIndex="severity" key="severity" render={(severity) => <Tag color={severityColor[severity]}>{severityText[severity]}</Tag>} />
