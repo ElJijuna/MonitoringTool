@@ -1,4 +1,5 @@
 import { WebAuditReport } from '../../domain/web-audit-report/web-audit-report';
+import { parseUrl } from '../../utils/parse-url';
 
 export interface GetWebAuditReportProps {
   application: string;
@@ -7,7 +8,8 @@ export interface GetWebAuditReportProps {
 
 export const getWebAuditReport = async ({ application, signal }: GetWebAuditReportProps): Promise<WebAuditReport> => {
   try {
-    const response = await fetch(`http://localhost:3000/api/applications/${application}/scans/web-audit?`, { signal });
+    const query = new URLSearchParams();
+    const response = await fetch(`${parseUrl(import.meta.env.VITE_APP_APPLICATION_SCANS_WEB_AUDIT_API_URL, { appId: application })}?${query}`, { signal });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

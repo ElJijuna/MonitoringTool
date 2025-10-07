@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:github": "vite --mode=github",
     "build": "tsc -b && vite build",
+    "build:prod": "npm run build -- --mode=production",
+    "build:github": "npm run build -- --mode=github",
     "lint": "eslint .",
     "preview": "vite preview",
     "routes": "tsr generate"
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@sctg/vite-plugin-github-pages-spa": "^0.1.1",
     "@tanstack/router-cli": "^1.132.41",
     "@tanstack/router-plugin": "^1.132.41",
     "@types/node": "^24.5.2",

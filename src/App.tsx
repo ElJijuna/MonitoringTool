@@ -4,7 +4,7 @@ import { routeTree } from './routeTree.gen';
 import type { FC } from 'react';
 
 const router = createRouter({
-  basepath: '/MonitoringTool/',
+  basepath: import.meta.env.BASE_URL,
   routeTree,
 })
 

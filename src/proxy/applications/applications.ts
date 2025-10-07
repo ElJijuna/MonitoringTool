@@ -6,7 +6,8 @@ export interface GetApplicationsProps {
 
 export const getApplications = async ({ signal }: GetApplicationsProps): Promise<Application[]> => {
   try {
-    const response = await fetch(`http://localhost:3000/api/applications?`, { signal });
+    const query = new URLSearchParams();
+    const response = await fetch(`${import.meta.env.VITE_APP_APPLICATIONS_API_URL}?${query}`, { signal });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,6 +18,6 @@ export const getApplications = async ({ signal }: GetApplicationsProps): Promise
     return data.map((application: AplicationResponse) => new Application(application));
   } catch (error) {
     console.error('Error fetching web audit report:', error);
-    throw error;  
+    throw error;
   }
 }
