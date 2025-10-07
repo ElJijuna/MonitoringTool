@@ -17,10 +17,10 @@ export const WebAudit: FC<WebAuditProps> = ({ children }) => {
   return (
     <Grid>
       <Row gutter={10}>
-        <Col span={12}>
+        <Col span={15}>
           <WebAuditCWETypes application={appId} />
         </Col>
-        <Col span={12}>
+        <Col span={9}>
           <WebAuditPie application={appId} /> 
         </Col>
       </Row>
