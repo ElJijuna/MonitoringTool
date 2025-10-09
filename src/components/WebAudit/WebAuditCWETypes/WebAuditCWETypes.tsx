@@ -26,7 +26,6 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ application }: Web
   const categories = useMemo(() => data.map(({ code }) => code), [data]);
   const randomBarColors = useMemo(() => categories.map(() => generateRandomColor()), [categories]);
 
-  console.log({values})
   return (
     <div
       style={{
