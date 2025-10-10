@@ -1,8 +1,8 @@
 import { createElement, type FC, type PropsWithChildren, type ReactElement } from 'react';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { useApplications } from '../../proxy-queries/useApplications';
+import { EyeOutlined, ForkOutlined, IssuesCloseOutlined, StarOutlined } from '@ant-design/icons';
 import { List, Space } from 'antd';
 import { Link } from '@tanstack/react-router';
+import { useRepositories } from '../../proxy-queries/useRepositories';
 
 const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   <Space>
@@ -14,7 +14,7 @@ const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
 export interface ApplicationsListProps extends PropsWithChildren { }
 
 export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: ApplicationsListProps): ReactElement => {
-  const { data: applications, isPending } = useApplications({ application: '' });
+  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna' });
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -33,15 +33,15 @@ export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: Applic
         dataSource={applications}
         renderItem={(item) => (
           <List.Item key={item.id} actions={[
-            <IconText icon={StarOutlined} text='156' key='list-vertical-star-o' />,
-            <IconText icon={LikeOutlined} text='156' key='list-vertical-like-o' />,
-            <IconText icon={MessageOutlined} text='2' key='list-vertical-message' />,
+            <IconText icon={StarOutlined} text={item.stargazers_count.toString()} key='list-vertical-star-o' />,
+            <IconText icon={ForkOutlined} text={item.forks_count.toString()} key='list-vertical-like-o' />,
+            <IconText icon={IssuesCloseOutlined} text={item.open_issues_count.toString()} key='list-vertical-message' />,
+            <IconText icon={EyeOutlined} text={item.watchers_count.toString()} key='list-vertical-message' />,
           ]}>
             <List.Item.Meta
               title={<Link to={`/applications/${item.name}`}>{item.name}</Link>}
-              description={item.name}
             />
-            Application Description
+            {item.description}
           </List.Item>
         )}
       />
