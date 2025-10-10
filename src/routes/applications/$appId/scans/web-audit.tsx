@@ -9,7 +9,7 @@ const ApplicationWebAudit: FC = (): ReactElement => {
 };
 
 export const Route = createFileRoute('/applications/$appId/scans/web-audit')({
-    component: ApplicationWebAudit,
+  component: ApplicationWebAudit,
 });
 
 export default ApplicationWebAudit;

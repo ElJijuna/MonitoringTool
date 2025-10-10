@@ -6,6 +6,7 @@ import App from './App';
 import * as TanStackQueryProvider from './integrations/react-query'
 import reportWebVitals from './reportWebVitals';
 import { getContext } from './integrations/react-query-context';
+import { NuqsAdapter } from 'nuqs/adapters/react';
 
 const TanStackQueryProviderContext = getContext();
 const rootElement = document.getElementById('root');
@@ -16,7 +17,9 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <TanStackQueryProvider.Provider {...TanStackQueryProviderContext}>
-        <App />
+        <NuqsAdapter>
+          <App />
+        </NuqsAdapter>
       </TanStackQueryProvider.Provider>
     </StrictMode>,
   )
