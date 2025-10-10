@@ -1,6 +1,6 @@
 import { useCallback, type FC } from 'react';
 import { PieChartOutlined } from '@ant-design/icons';
-import { useNavigate, useParams } from '@tanstack/react-router';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 import Menu from 'antd/es/menu/menu';
 import { useRepositories } from '../../proxy-queries/useRepositories';
 import { Spin } from 'antd';
@@ -8,10 +8,8 @@ import { FaChampagneGlasses } from 'react-icons/fa6';
 
 export const SideBarMenu: FC = () => {
   const navigate = useNavigate();
-    const { appId } = useParams({
-      strict: true,
-      from: undefined
-    });
+  const router = useRouter();
+  const currentPath = router.state.location.pathname;
   const { data: applications, isPending } = useRepositories({ user: 'ElJijuna' });
   
   const handleClick = useCallback(({ key }: { key: string }) => {
@@ -24,7 +22,7 @@ export const SideBarMenu: FC = () => {
     );
   }
 
-  return <Menu onClick={handleClick} theme="dark" defaultSelectedKeys={[appId]} items={[
+  return <Menu onClick={handleClick} theme="dark" defaultSelectedKeys={[currentPath]} items={[
     {
       key: '/applications',
       icon: <PieChartOutlined />,
