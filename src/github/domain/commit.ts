@@ -40,3 +40,5 @@ export interface GitHubCommit {
     html_url: string;
   }[];
 }
+
+export type GitHubCommits = GitHubCommit[];
