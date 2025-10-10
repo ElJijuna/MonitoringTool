@@ -1,0 +1,11 @@
+.CardContainer {
+  padding: 4px;
+
+  :hover {
+    outline: 2px solid var(--antd-color-primary);
+  }
+}
+
+.FontVariantTabular {
+  font-variant: tabular-nums;
+}
