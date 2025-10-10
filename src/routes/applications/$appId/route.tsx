@@ -17,7 +17,7 @@ export const ApplicationRoute: FC = (): ReactElement => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { data, isPending } = useRepository({ user: 'ElJijuna', repository: appId });
+  const { data, } = useRepository({ user: 'ElJijuna', repository: appId });
 
   return (
     <Layout>

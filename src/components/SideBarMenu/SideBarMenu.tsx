@@ -1,26 +1,49 @@
-import type { FC } from 'react';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import { useNavigate } from '@tanstack/react-router';
+import { useCallback, type FC } from 'react';
+import { PieChartOutlined } from '@ant-design/icons';
+import { useNavigate, useParams } from '@tanstack/react-router';
 import Menu from 'antd/es/menu/menu';
+import { useRepositories } from '../../proxy-queries/useRepositories';
+import { Spin } from 'antd';
+import { FaChampagneGlasses } from 'react-icons/fa6';
 
 export const SideBarMenu: FC = () => {
   const navigate = useNavigate();
+    const { appId } = useParams({
+      strict: true,
+      from: undefined
+    });
+  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna' });
+  
+  const handleClick = useCallback(({ key }: { key: string }) => {
+    navigate({ to: key })
+  }, []);
 
-  return <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={[
-    { key: 'Applications', icon: <PieChartOutlined />, label: 'Applications', onClick: () => { navigate({ to: '/applications', search: true }); } },
-    { key: 'WebAudit', icon: <DesktopOutlined />, label: 'Web Audit', onClick: () => { navigate({ to: '', search: true }); } },
+  if (isPending) {
+    return (
+      <Spin />
+    );
+  }
+
+  return <Menu onClick={handleClick} theme="dark" defaultSelectedKeys={[appId]} items={[
     {
-      key: 'submenu3',
-      icon: <UserOutlined />,
-      label: 'Menu 3 Group',
-      children: [
-        { key: 'submenu3-1', label: 'Submenu 3.1' },
-        { key: 'submenu3-2', label: 'Submenu 3.2' },
-      ],
+      key: '/applications',
+      icon: <PieChartOutlined />,
+      label: 'Applications',
+      children: applications?.map(({ name }) => ({
+        icon: <FaChampagneGlasses size={16} />,
+        key: `/applications/${name}`,
+        label: name,
+        children: [{
+          key:  `/applications/${name}/scans`,
+          label: 'Scans',
+          children: [
+            { 
+              key: `/applications/${name}/scans/web-audit`,
+              label: 'Web Audit'
+            }
+          ]
+        }]
+      }))
     },
   ]} />;
 }
