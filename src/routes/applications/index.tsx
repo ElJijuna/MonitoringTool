@@ -1,15 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 import type { FC, ReactElement } from 'react';
 import { ApplicationsList } from '../../components/ApplicationsList/ApplicationsList';
 import Title from 'antd/es/typography/Title';
-import { Flex, theme } from 'antd';
+import { Flex } from 'antd';
 import Layout, { Content, Footer, Header } from 'antd/es/layout/layout';
+import { CardContainer } from '../../components/CardContainer/CardContainer';
 
 const Applications: FC = (): ReactElement => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
   return (
     <Layout>
       <Header style={{ background: 'transparent', padding: '0 16px' }}>
@@ -20,16 +17,9 @@ const Applications: FC = (): ReactElement => {
         </Flex>
       </Header>
       <Content style={{ padding: '0 16px' }}>
-        <div
-          style={{
-            padding: 10,
-            minHeight: 360,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
+        <CardContainer>
           <ApplicationsList />
-        </div>
+        </CardContainer>
       </Content>
       <Footer />
     </Layout>

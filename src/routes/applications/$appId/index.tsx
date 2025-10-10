@@ -1,24 +1,21 @@
-import { Link, createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute, Link, useParams } from '@tanstack/react-router';
 import type { FC, ReactElement } from 'react';
 
-const ApplicationIndex: FC = (): ReactElement => {
+export const Application: FC = (): ReactElement => {
   const { appId } = useParams({
     strict: true,
     from: undefined
   });
+    
   return (
-    <div>
-      <div>
-        <h3>Detalles de app</h3>
-        <Link to={`/applications/${appId}/scans/web-audit`}>Ir a Web Audit</Link>
-      </div>
-    </div>
+    <>
+      <h1>TODO</h1>
+      <Link to={`/applications/${appId}/scans`}>Scans</Link>
+    </>
   );
 };
 
 export const Route = createFileRoute('/applications/$appId/')({
-  component: ApplicationIndex,
+  component: () => <Application />,
 });
-
-export default ApplicationIndex;
 

@@ -1,14 +1,15 @@
-import { createFileRoute, Outlet, useParams } from '@tanstack/react-router';
+import { createFileRoute, Link, Outlet, useParams } from '@tanstack/react-router';
 import { Flex, Layout } from 'antd';
-import Breadcrumb from 'antd/es/breadcrumb';
 import { Content, Header, Footer } from 'antd/es/layout/layout';
 import theme from 'antd/es/theme';
 import Title from 'antd/es/typography/Title';
 import Text from 'antd/es/typography/Text';
 import { FaReact } from 'react-icons/fa6';
 import type { FC, ReactElement } from 'react';
+import { BreadcrumbNav } from '../../../components/BreadcrumbNav/BreadcrumbNav';
+import { useRepository } from '../../../github/proxy-queries/useRepository';
 
-const Application: FC = (): ReactElement => {
+export const ApplicationRoute: FC = (): ReactElement => {
   const { appId } = useParams({
     strict: true,
     from: undefined
@@ -16,6 +17,7 @@ const Application: FC = (): ReactElement => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const { data, isPending } = useRepository({ user: 'ElJijuna', repository: appId });
 
   return (
     <Layout>
@@ -31,22 +33,26 @@ const Application: FC = (): ReactElement => {
           <FaReact size={46} />
           <Flex vertical>
             <Title level={3} style={{ margin: 0 }}>{appId}</Title>
-            <Text>Description app</Text>
+            <Text>{data?.description}</Text>
           </Flex>
         </Flex>
       </Header>
       <Content style={{ padding: '0 16px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'Parent' }, { title: 'Child' }]} />
+        <BreadcrumbNav />
         <Outlet />
       </Content>
       <Footer />
     </Layout>
   );
-};
+}
 
 export const Route = createFileRoute('/applications/$appId')({
-  component: Application,
+  component: () => <ApplicationRoute />,
+  loader: ({ params }) => {
+    const { appId } = params;
+
+    return {
+      crumb: appId,
+    }
+  },
 });
-
-export default Application;
-

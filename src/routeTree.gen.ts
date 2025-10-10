@@ -10,94 +10,142 @@
 
 import { Route as rootRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/__root'
 import { Route as UsersRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/users'
-import { Route as ApplicationsRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications'
+import { Route as ApplicationsRouteRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/route'
+import { Route as IndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/index'
 import { Route as ApplicationsIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/index'
-import { Route as ApplicationsAppIdRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId'
+import { Route as ApplicationsAppIdRouteRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/route'
 import { Route as ApplicationsAppIdIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/index'
-import { Route as ApplicationsAppIdScansWebAuditRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit'
+import { Route as ApplicationsAppIdScansRouteRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/route'
+import { Route as ApplicationsAppIdScansIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/index'
+import { Route as ApplicationsAppIdScansWebAuditRouteRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit/route'
+import { Route as ApplicationsAppIdScansWebAuditIndexRouteImport } from '/Users/pilmee/Documents/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit/index'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApplicationsRoute = ApplicationsRouteImport.update({
+const ApplicationsRouteRoute = ApplicationsRouteRouteImport.update({
   id: '/applications',
   path: '/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplicationsIndexRoute = ApplicationsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ApplicationsRoute,
+  getParentRoute: () => ApplicationsRouteRoute,
 } as any)
-const ApplicationsAppIdRoute = ApplicationsAppIdRouteImport.update({
+const ApplicationsAppIdRouteRoute = ApplicationsAppIdRouteRouteImport.update({
   id: '/$appId',
   path: '/$appId',
-  getParentRoute: () => ApplicationsRoute,
+  getParentRoute: () => ApplicationsRouteRoute,
 } as any)
 const ApplicationsAppIdIndexRoute = ApplicationsAppIdIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ApplicationsAppIdRoute,
+  getParentRoute: () => ApplicationsAppIdRouteRoute,
 } as any)
-const ApplicationsAppIdScansWebAuditRoute =
-  ApplicationsAppIdScansWebAuditRouteImport.update({
-    id: '/scans/web-audit',
-    path: '/scans/web-audit',
-    getParentRoute: () => ApplicationsAppIdRoute,
+const ApplicationsAppIdScansRouteRoute =
+  ApplicationsAppIdScansRouteRouteImport.update({
+    id: '/scans',
+    path: '/scans',
+    getParentRoute: () => ApplicationsAppIdRouteRoute,
+  } as any)
+const ApplicationsAppIdScansIndexRoute =
+  ApplicationsAppIdScansIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ApplicationsAppIdScansRouteRoute,
+  } as any)
+const ApplicationsAppIdScansWebAuditRouteRoute =
+  ApplicationsAppIdScansWebAuditRouteRouteImport.update({
+    id: '/web-audit',
+    path: '/web-audit',
+    getParentRoute: () => ApplicationsAppIdScansRouteRoute,
+  } as any)
+const ApplicationsAppIdScansWebAuditIndexRoute =
+  ApplicationsAppIdScansWebAuditIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ApplicationsAppIdScansWebAuditRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/applications': typeof ApplicationsRouteWithChildren
+  '/': typeof IndexRoute
+  '/applications': typeof ApplicationsRouteRouteWithChildren
   '/users': typeof UsersRoute
-  '/applications/$appId': typeof ApplicationsAppIdRouteWithChildren
+  '/applications/$appId': typeof ApplicationsAppIdRouteRouteWithChildren
   '/applications/': typeof ApplicationsIndexRoute
+  '/applications/$appId/scans': typeof ApplicationsAppIdScansRouteRouteWithChildren
   '/applications/$appId/': typeof ApplicationsAppIdIndexRoute
-  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditRoute
+  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditRouteRouteWithChildren
+  '/applications/$appId/scans/': typeof ApplicationsAppIdScansIndexRoute
+  '/applications/$appId/scans/web-audit/': typeof ApplicationsAppIdScansWebAuditIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/users': typeof UsersRoute
   '/applications': typeof ApplicationsIndexRoute
   '/applications/$appId': typeof ApplicationsAppIdIndexRoute
-  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditRoute
+  '/applications/$appId/scans': typeof ApplicationsAppIdScansIndexRoute
+  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/applications': typeof ApplicationsRouteWithChildren
+  '/': typeof IndexRoute
+  '/applications': typeof ApplicationsRouteRouteWithChildren
   '/users': typeof UsersRoute
-  '/applications/$appId': typeof ApplicationsAppIdRouteWithChildren
+  '/applications/$appId': typeof ApplicationsAppIdRouteRouteWithChildren
   '/applications/': typeof ApplicationsIndexRoute
+  '/applications/$appId/scans': typeof ApplicationsAppIdScansRouteRouteWithChildren
   '/applications/$appId/': typeof ApplicationsAppIdIndexRoute
-  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditRoute
+  '/applications/$appId/scans/web-audit': typeof ApplicationsAppIdScansWebAuditRouteRouteWithChildren
+  '/applications/$appId/scans/': typeof ApplicationsAppIdScansIndexRoute
+  '/applications/$appId/scans/web-audit/': typeof ApplicationsAppIdScansWebAuditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/applications'
     | '/users'
     | '/applications/$appId'
     | '/applications/'
+    | '/applications/$appId/scans'
     | '/applications/$appId/'
     | '/applications/$appId/scans/web-audit'
+    | '/applications/$appId/scans/'
+    | '/applications/$appId/scans/web-audit/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/users'
     | '/applications'
     | '/applications/$appId'
+    | '/applications/$appId/scans'
     | '/applications/$appId/scans/web-audit'
   id:
     | '__root__'
+    | '/'
     | '/applications'
     | '/users'
     | '/applications/$appId'
     | '/applications/'
+    | '/applications/$appId/scans'
     | '/applications/$appId/'
     | '/applications/$appId/scans/web-audit'
+    | '/applications/$appId/scans/'
+    | '/applications/$appId/scans/web-audit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  ApplicationsRoute: typeof ApplicationsRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  ApplicationsRouteRoute: typeof ApplicationsRouteRouteWithChildren
   UsersRoute: typeof UsersRoute
 }
 
@@ -114,7 +162,14 @@ declare module '@tanstack/react-router' {
       id: '/applications'
       path: '/applications'
       fullPath: '/applications'
-      preLoaderRoute: typeof ApplicationsRouteImport
+      preLoaderRoute: typeof ApplicationsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/applications/': {
@@ -122,61 +177,118 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/applications/'
       preLoaderRoute: typeof ApplicationsIndexRouteImport
-      parentRoute: typeof ApplicationsRoute
+      parentRoute: typeof ApplicationsRouteRoute
     }
     '/applications/$appId': {
       id: '/applications/$appId'
       path: '/$appId'
       fullPath: '/applications/$appId'
-      preLoaderRoute: typeof ApplicationsAppIdRouteImport
-      parentRoute: typeof ApplicationsRoute
+      preLoaderRoute: typeof ApplicationsAppIdRouteRouteImport
+      parentRoute: typeof ApplicationsRouteRoute
     }
     '/applications/$appId/': {
       id: '/applications/$appId/'
       path: '/'
       fullPath: '/applications/$appId/'
       preLoaderRoute: typeof ApplicationsAppIdIndexRouteImport
-      parentRoute: typeof ApplicationsAppIdRoute
+      parentRoute: typeof ApplicationsAppIdRouteRoute
+    }
+    '/applications/$appId/scans': {
+      id: '/applications/$appId/scans'
+      path: '/scans'
+      fullPath: '/applications/$appId/scans'
+      preLoaderRoute: typeof ApplicationsAppIdScansRouteRouteImport
+      parentRoute: typeof ApplicationsAppIdRouteRoute
+    }
+    '/applications/$appId/scans/': {
+      id: '/applications/$appId/scans/'
+      path: '/'
+      fullPath: '/applications/$appId/scans/'
+      preLoaderRoute: typeof ApplicationsAppIdScansIndexRouteImport
+      parentRoute: typeof ApplicationsAppIdScansRouteRoute
     }
     '/applications/$appId/scans/web-audit': {
       id: '/applications/$appId/scans/web-audit'
-      path: '/scans/web-audit'
+      path: '/web-audit'
       fullPath: '/applications/$appId/scans/web-audit'
-      preLoaderRoute: typeof ApplicationsAppIdScansWebAuditRouteImport
-      parentRoute: typeof ApplicationsAppIdRoute
+      preLoaderRoute: typeof ApplicationsAppIdScansWebAuditRouteRouteImport
+      parentRoute: typeof ApplicationsAppIdScansRouteRoute
+    }
+    '/applications/$appId/scans/web-audit/': {
+      id: '/applications/$appId/scans/web-audit/'
+      path: '/'
+      fullPath: '/applications/$appId/scans/web-audit/'
+      preLoaderRoute: typeof ApplicationsAppIdScansWebAuditIndexRouteImport
+      parentRoute: typeof ApplicationsAppIdScansWebAuditRouteRoute
     }
   }
 }
 
-interface ApplicationsAppIdRouteChildren {
+interface ApplicationsAppIdScansWebAuditRouteRouteChildren {
+  ApplicationsAppIdScansWebAuditIndexRoute: typeof ApplicationsAppIdScansWebAuditIndexRoute
+}
+
+const ApplicationsAppIdScansWebAuditRouteRouteChildren: ApplicationsAppIdScansWebAuditRouteRouteChildren =
+  {
+    ApplicationsAppIdScansWebAuditIndexRoute:
+      ApplicationsAppIdScansWebAuditIndexRoute,
+  }
+
+const ApplicationsAppIdScansWebAuditRouteRouteWithChildren =
+  ApplicationsAppIdScansWebAuditRouteRoute._addFileChildren(
+    ApplicationsAppIdScansWebAuditRouteRouteChildren,
+  )
+
+interface ApplicationsAppIdScansRouteRouteChildren {
+  ApplicationsAppIdScansWebAuditRouteRoute: typeof ApplicationsAppIdScansWebAuditRouteRouteWithChildren
+  ApplicationsAppIdScansIndexRoute: typeof ApplicationsAppIdScansIndexRoute
+}
+
+const ApplicationsAppIdScansRouteRouteChildren: ApplicationsAppIdScansRouteRouteChildren =
+  {
+    ApplicationsAppIdScansWebAuditRouteRoute:
+      ApplicationsAppIdScansWebAuditRouteRouteWithChildren,
+    ApplicationsAppIdScansIndexRoute: ApplicationsAppIdScansIndexRoute,
+  }
+
+const ApplicationsAppIdScansRouteRouteWithChildren =
+  ApplicationsAppIdScansRouteRoute._addFileChildren(
+    ApplicationsAppIdScansRouteRouteChildren,
+  )
+
+interface ApplicationsAppIdRouteRouteChildren {
+  ApplicationsAppIdScansRouteRoute: typeof ApplicationsAppIdScansRouteRouteWithChildren
   ApplicationsAppIdIndexRoute: typeof ApplicationsAppIdIndexRoute
-  ApplicationsAppIdScansWebAuditRoute: typeof ApplicationsAppIdScansWebAuditRoute
 }
 
-const ApplicationsAppIdRouteChildren: ApplicationsAppIdRouteChildren = {
-  ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
-  ApplicationsAppIdScansWebAuditRoute: ApplicationsAppIdScansWebAuditRoute,
-}
+const ApplicationsAppIdRouteRouteChildren: ApplicationsAppIdRouteRouteChildren =
+  {
+    ApplicationsAppIdScansRouteRoute:
+      ApplicationsAppIdScansRouteRouteWithChildren,
+    ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
+  }
 
-const ApplicationsAppIdRouteWithChildren =
-  ApplicationsAppIdRoute._addFileChildren(ApplicationsAppIdRouteChildren)
+const ApplicationsAppIdRouteRouteWithChildren =
+  ApplicationsAppIdRouteRoute._addFileChildren(
+    ApplicationsAppIdRouteRouteChildren,
+  )
 
-interface ApplicationsRouteChildren {
-  ApplicationsAppIdRoute: typeof ApplicationsAppIdRouteWithChildren
+interface ApplicationsRouteRouteChildren {
+  ApplicationsAppIdRouteRoute: typeof ApplicationsAppIdRouteRouteWithChildren
   ApplicationsIndexRoute: typeof ApplicationsIndexRoute
 }
 
-const ApplicationsRouteChildren: ApplicationsRouteChildren = {
-  ApplicationsAppIdRoute: ApplicationsAppIdRouteWithChildren,
+const ApplicationsRouteRouteChildren: ApplicationsRouteRouteChildren = {
+  ApplicationsAppIdRouteRoute: ApplicationsAppIdRouteRouteWithChildren,
   ApplicationsIndexRoute: ApplicationsIndexRoute,
 }
 
-const ApplicationsRouteWithChildren = ApplicationsRoute._addFileChildren(
-  ApplicationsRouteChildren,
-)
+const ApplicationsRouteRouteWithChildren =
+  ApplicationsRouteRoute._addFileChildren(ApplicationsRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  ApplicationsRoute: ApplicationsRouteWithChildren,
+  IndexRoute: IndexRoute,
+  ApplicationsRouteRoute: ApplicationsRouteRouteWithChildren,
   UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
