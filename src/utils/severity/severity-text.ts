@@ -1,4 +1,6 @@
-export const severityText: Record<string, string> = {
+import type { SeverityTypes } from './severity-types';
+
+export const severityText: Record<SeverityTypes, string> = {
   critical: 'Critical',
   high: 'High',
   medium: 'Medium',
