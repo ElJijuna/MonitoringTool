@@ -3,6 +3,8 @@ import { EyeOutlined, ForkOutlined, IssuesCloseOutlined, StarOutlined } from '@a
 import { List, Space } from 'antd';
 import { Link } from '@tanstack/react-router';
 import { useRepositories } from '../../proxy-queries/useRepositories';
+import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
+import { CardContainer } from '../CardContainer/CardContainer';
 
 const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   <Space>
@@ -11,10 +13,12 @@ const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   </Space>
 );
 
-export interface ApplicationsListProps extends PropsWithChildren { }
+export interface ApplicationsListProps extends PropsWithChildren {
+  filter?: string;
+}
 
-export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: ApplicationsListProps): ReactElement => {
-  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna' });
+export const ApplicationsList: FC<ApplicationsListProps> = ({ children, filter }: ApplicationsListProps): ReactElement => {
+  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna', filter });
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -25,7 +29,7 @@ export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: Applic
   }
 
   return (
-    <div>
+    <CardContainer>
       <List
         itemLayout='vertical'
         size='large'
@@ -39,6 +43,7 @@ export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: Applic
             <IconText icon={EyeOutlined} text={item.watchers_count.toString()} key='list-vertical-message' />,
           ]}>
             <List.Item.Meta
+              avatar={<LanguageIcon language={item.language} size={32} />}
               title={<Link to={`/applications/${item.name}`}>{item.name}</Link>}
             />
             {item.description}
@@ -46,6 +51,6 @@ export const ApplicationsList: FC<ApplicationsListProps> = ({ children }: Applic
         )}
       />
       {children}
-    </div>
+    </CardContainer>
   );
 }

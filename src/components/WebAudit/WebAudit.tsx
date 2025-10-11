@@ -33,10 +33,10 @@ export const WebAudit: FC<WebAuditProps> = ({ children }) => {
               }} />
             </Flex>
             <Flex justify="flex-start" gap={10} style={{ display: 'inline-flex' }}>
-              <Radio.Group value={1}>
+              <Radio.Group value="dev">
                 <Radio.Button value="dev">Dev</Radio.Button>
               </Radio.Group>
-              <Radio.Group value={5}>
+              <Radio.Group value={severityText.critical}>
                 <Radio.Button value={severityText.critical}>{severityText.critical}</Radio.Button>
                 <Radio.Button value={severityText.high}>{severityText.high}</Radio.Button>
                 <Radio.Button value={severityText.moderate}>{severityText.moderate}</Radio.Button>

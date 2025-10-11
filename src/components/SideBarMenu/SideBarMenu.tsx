@@ -1,12 +1,16 @@
-import { useCallback, type FC } from 'react';
+import { useCallback, type FC, type PropsWithChildren, type ReactElement } from 'react';
 import { PieChartOutlined } from '@ant-design/icons';
 import { useNavigate, useRouter } from '@tanstack/react-router';
 import Menu from 'antd/es/menu/menu';
 import { useRepositories } from '../../proxy-queries/useRepositories';
 import { Spin } from 'antd';
-import { FaChampagneGlasses } from 'react-icons/fa6';
+import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
 
-export const SideBarMenu: FC = () => {
+export interface SideBarMenuProps extends PropsWithChildren {
+  collapsed?: boolean;
+}
+
+export const SideBarMenu: FC<SideBarMenuProps> = (): ReactElement => {
   const navigate = useNavigate();
   const router = useRouter();
   const currentPath = router.state.location.pathname;
@@ -27,8 +31,8 @@ export const SideBarMenu: FC = () => {
       key: '/applications',
       icon: <PieChartOutlined />,
       label: 'Applications',
-      children: applications?.map(({ name }) => ({
-        icon: <FaChampagneGlasses size={16} />,
+      children: applications?.map(({ name, language }) => ({
+        icon: <LanguageIcon language={language} size={12} {...{ style: { marginRight: 10 } }} />,
         key: `/applications/${name}`,
         label: name,
         children: [{

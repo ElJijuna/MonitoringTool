@@ -1,12 +1,17 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router';
-import type { FC, ReactElement } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { useCallback, type ChangeEvent, type FC, type ReactElement } from 'react';
 import { ApplicationsList } from '../../components/ApplicationsList/ApplicationsList';
 import Title from 'antd/es/typography/Title';
-import { Flex } from 'antd';
+import { Flex, Input } from 'antd';
 import Layout, { Content, Footer, Header } from 'antd/es/layout/layout';
-import { CardContainer } from '../../components/CardContainer/CardContainer';
+import { parseAsString, useQueryStates } from 'nuqs';
 
 const Applications: FC = (): ReactElement => {
+  const [filters, setFilters] = useQueryStates({ search: parseAsString.withDefault('') });
+  const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setFilters({ search: e.target.value });
+  }, []);
+
   return (
     <Layout>
       <Header style={{ background: 'transparent', padding: '0 16px' }}>
@@ -17,9 +22,10 @@ const Applications: FC = (): ReactElement => {
         </Flex>
       </Header>
       <Content style={{ padding: '0 16px' }}>
-        <CardContainer>
-          <ApplicationsList />
-        </CardContainer>
+        <Flex vertical gap={10}>
+          <Input.Search placeholder="Search application..." allowClear onChange={handleSearch} />
+          <ApplicationsList filter={filters.search} />
+        </Flex>
       </Content>
       <Footer />
     </Layout>
