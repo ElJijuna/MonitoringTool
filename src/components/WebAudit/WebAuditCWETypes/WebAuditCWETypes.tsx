@@ -2,6 +2,7 @@ import { useMemo, type FC, type ReactElement } from 'react';
 import { useWebAuditCWE } from '../hooks/useWebAuditCWE';
 import { theme } from 'antd';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { CardContainer } from '../../CardContainer/CardContainer';
 
 const generateRandomColor = () => {
   const letters = '0123456789ABCDEF';
@@ -14,27 +15,20 @@ const generateRandomColor = () => {
 
 
 export interface WebAuditCWETypesProps {
+  user: string;
+  repository: string;
   application: string;
+  commit: string;
 }
 
-export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ application }: WebAuditCWETypesProps): ReactElement => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-  const [data] = useWebAuditCWE({ application });
+export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, application, commit }: WebAuditCWETypesProps): ReactElement => {
+  const [data] = useWebAuditCWE({ user, repository, application, commit });
   const values = useMemo<number[]>(() => Object.values(data.map(({ total }) => total)), [data]);
   const categories = useMemo(() => data.map(({ code }) => code), [data]);
   const randomBarColors = useMemo(() => categories.map(() => generateRandomColor()), [categories]);
 
-  console.log({values})
   return (
-    <div
-      style={{
-        padding: 10,
-        background: colorBgContainer,
-        borderRadius: borderRadiusLG,
-      }}
-    >
+    <CardContainer>
       <BarChart
         hideLegend
         borderRadius={4}
@@ -79,6 +73,6 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ application }: Web
           },
         }}
       />
-    </div>
+    </CardContainer>
   );
 };

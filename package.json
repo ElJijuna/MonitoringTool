@@ -23,9 +23,11 @@
     "@tanstack/react-router": "^1.132.23",
     "@tanstack/react-router-devtools": "^1.132.23",
     "antd": "^5.27.4",
+    "nuqs": "^2.7.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

@@ -28,7 +28,7 @@ const Root: FC = (): ReactElement => {
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}>
         <ApplicationName collapsed={collapsed} />
         <Content style={{ padding: 4 }}>
-          <SideBarMenu />
+          <SideBarMenu collapsed={collapsed} />
         </Content>
       </Sider>
       <Layout>
