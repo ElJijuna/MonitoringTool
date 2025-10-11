@@ -29,7 +29,7 @@ export const PathCommitsDropdown: FC<PathCommitsDropdownProps> = ({ user, reposi
     }, [items]);
   
   return (
-    <DropdownButton className="FontVariantTabular" menu={{ items, onClick: (e) => onClickCallback(e.key) }} placement="bottomCenter" icon={<FaCodeCommit size={16} />} loading={isPending}>
+    <DropdownButton className="FontVariantTabular" menu={{ items, onClick: (e) => onClickCallback(e.key) }} placement="bottom" icon={<FaCodeCommit size={16} />} loading={isPending}>
       Version: <strong>{selected?.slice(0, 7)}</strong>
     </DropdownButton>
   );

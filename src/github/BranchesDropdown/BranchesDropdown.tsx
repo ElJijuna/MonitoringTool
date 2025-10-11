@@ -28,7 +28,7 @@ export const BranchesDropdown: FC<BranchesDropdownPops> = ({ user, repository, d
   }, [items]);
 
   return (
-    <DropdownButton className="FontVariantTabular" menu={{ items, onClick: (e) => onClickCallback(e.key) }} placement="bottomCenter" icon={<FaCodeBranch size={16} />} loading={isPending}>
+    <DropdownButton className="FontVariantTabular" menu={{ items, onClick: (e) => onClickCallback(e.key) }} placement="bottom" icon={<FaCodeBranch size={16} />} loading={isPending}>
       Branch: <strong>{selected?.slice(0, 7)}</strong>
     </DropdownButton>
   );
