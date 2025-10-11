@@ -1,7 +1,8 @@
 
-import { isMatch, Link, useMatches } from '@tanstack/react-router';
+import { isMatch, useMatches } from '@tanstack/react-router';
 import { Breadcrumb } from 'antd';
 import type { FC, ReactElement } from 'react';
+import { FaAnglesRight } from 'react-icons/fa6';
 
 export const BreadcrumbNav: FC = (): ReactElement => {
   const matches = useMatches();
@@ -11,14 +12,12 @@ export const BreadcrumbNav: FC = (): ReactElement => {
 
   const items = matchesWithCrumbs.map(({ pathname, loaderData }) => {
     return {
-      href: pathname,
-      label: loaderData?.crumb,
+      href: `${import.meta.env.BASE_URL}${pathname}`,
+      title: loaderData?.crumb,
     };
   });
 
   return (
-    <Breadcrumb separator=">" style={{ margin: '16px 0' }}>
-      {items.map(({ label, href }) => (<Breadcrumb.Item href={`${import.meta.env.BASE_URL}${href}`}>{label}</Breadcrumb.Item>))}
-    </Breadcrumb>
+    <Breadcrumb separator={<FaAnglesRight size={8} />} style={{ margin: '16px 0' }} items={items} />
   );
 };
