@@ -1,6 +1,5 @@
 import { useMemo, type FC, type ReactElement } from 'react';
 import { useWebAuditCWE } from '../hooks/useWebAuditCWE';
-import { theme } from 'antd';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { CardContainer } from '../../CardContainer/CardContainer';
 
