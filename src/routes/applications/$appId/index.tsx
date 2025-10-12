@@ -13,7 +13,7 @@ export const Application: FC = (): ReactElement => {
     
   return (
     <Flex vertical gap={10}>
-      <CardContainer minHeight="auto">
+      <CardContainer>
         <Tag>{application?.license?.name}</Tag>
         <Tag>{application?.forks}</Tag>
       </CardContainer>
