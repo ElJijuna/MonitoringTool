@@ -18,7 +18,7 @@ export const getWebAuditReport = async ({ user, repository, commit, application,
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const { report: data } = await response.json();
+    const data = await response.json();
 
     return new WebAuditReport(data);
   } catch (error) {

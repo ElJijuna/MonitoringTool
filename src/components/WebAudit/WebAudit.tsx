@@ -9,6 +9,8 @@ import { PathCommitsDropdown } from '../../github/components/PathCommitsDropdown
 import { BranchesDropdown } from '../../github/BranchesDropdown/BranchesDropdown';
 import { useQueryStates, parseAsString } from 'nuqs'
 import { severityText } from '../../utils/severity/severity-text';
+import { TotalDependencies } from './components/TotalDependencies/TotalDependencies';
+import { Versions } from './components/Versions/Versions';
 
 export interface WebAuditProps extends PropsWithChildren { }
 
@@ -48,11 +50,28 @@ export const WebAudit: FC<WebAuditProps> = ({ children }) => {
         </Col>
       </Row>
       <Row gutter={10} style={{ marginTop: 10 }}>
+        <Col span={4}>
+          <TotalDependencies user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} />
+        </Col>
+        <Col span={4}>
+          <TotalDependencies user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} dev />
+        </Col>
+        <Col span={3} offset={4}>
+          <Versions user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} />
+        </Col>
+        <Col span={3}>
+          <Versions user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} app="npm" />
+        </Col>
+        <Col span={6}>
+          <Versions user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} app="v8" />
+        </Col>
+      </Row>
+      <Row gutter={10} style={{ marginTop: 10 }}>
         <Col span={15}>
-          <WebAuditCWETypes user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit}  application={appId} />
+          <WebAuditCWETypes user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} />
         </Col>
         <Col span={9}>
-          <WebAuditPie user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit}  application={appId} />
+          <WebAuditPie user="ElJijuna" repository="MonitoringTool-DB" commit={filters.commit} application={appId} />
         </Col>
       </Row>
       <Row style={{ marginTop: 10 }}>
