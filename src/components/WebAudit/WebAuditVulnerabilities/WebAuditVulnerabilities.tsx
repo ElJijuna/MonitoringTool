@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, type FC, type PropsWithChildren, type ReactElement } from 'react';
+import { useMemo, useState, type FC, type PropsWithChildren, type ReactElement } from 'react';
 import { useWebAuditReport } from '../../../proxy-queries/useWebAuditReport';
 import Table from 'antd/es/table/Table';
 import Column from 'antd/es/table/Column';
@@ -36,10 +36,10 @@ export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ chil
     return <div>Loading...</div>;
   }
 
-  const selectDependencyHandle = useCallback((value: string) => {
+  const selectDependencyHandle = (value: string) => {
     setDependency(value);
     setOpen(true);
-  }, []);
+  };
 
   const onClose = () => {
     setOpen(false);
