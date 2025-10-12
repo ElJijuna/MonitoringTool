@@ -43,22 +43,56 @@ export interface Vulnerabilities {
   range: string;
   nodes: string[];
   fixAvailable: boolean | 'maybe';
+  isDirect: boolean;
+}
+
+interface WebAuditReportVersions {
+  node: string;
+  npm: string;
+  v8: string;
+}
+
+interface WebAuditReportDependencies {
+  current: string;
+  latest: string;
+  wanted: string;
+  dev: boolean;
 }
 
 export interface WebAuditReportResponse {
-  auditReportVersion: number;
-  vulnerabilities: Record<string, Vulnerabilities>;
-  metadata: WebAuditReportMetadata;
+  name: string;
+  runtime: string;
+  commit: string;
+  date: string;
+  versions: WebAuditReportVersions;
+  dependencies: Record<string, WebAuditReportDependencies>;
+  report: {
+    auditReportVersion: number;
+    vulnerabilities: Record<string, Vulnerabilities>;
+    metadata: WebAuditReportMetadata;
+  }
 }
 
 export class WebAuditReport {
+  readonly name: string;
+  readonly runtime: string;
+  readonly date: Date;
+  readonly commit: string;
   readonly version: number;
   readonly vulnerabilities: Record<string, Vulnerabilities> = {};
   readonly metadata: WebAuditReportMetadata;
+  readonly versions: WebAuditReportVersions;
+  readonly dependencies: Record<string, WebAuditReportDependencies>;
 
-  constructor(application: WebAuditReportResponse) {
-    this.version = application.auditReportVersion;
-    this.vulnerabilities = application.vulnerabilities;
-    this.metadata = application.metadata;
+  constructor({ report, name, runtime, date, commit, versions, dependencies }: WebAuditReportResponse) {
+    this.version = report.auditReportVersion;
+    this.vulnerabilities = report.vulnerabilities;
+    this.metadata = report.metadata;
+    this.name = name;
+    this.runtime = runtime;
+    this.date = new Date(date);
+    this.commit = commit;
+    this.versions = versions;
+    this.dependencies = dependencies;
   }
 }

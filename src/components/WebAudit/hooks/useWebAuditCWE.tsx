@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { useWebAuditReport } from "../../../proxy-queries/useWebAuditReport";
-import type { VulnerabilityVia } from "../../../domain/web-audit-report/web-audit-report";
+import { useMemo } from 'react';
+import { useWebAuditReport } from '../../../proxy-queries/useWebAuditReport';
+import type { VulnerabilityVia } from '../../../domain/web-audit-report/web-audit-report';
 
 export interface UseWebAuditCWEProps {
   user: string;
