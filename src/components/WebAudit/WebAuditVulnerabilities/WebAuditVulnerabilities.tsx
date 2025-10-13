@@ -32,10 +32,6 @@ export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ chil
   const { data, isPending } = useWebAuditReport({ user, repository, commit, application });
   const vulnerabilities = useMemo(() => Object.entries(data?.vulnerabilities ?? {}).map(([key, value]) => ({ key, ...value })), [data]);
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
   const selectDependencyHandle = (value: string) => {
     setDependency(value);
     setOpen(true);
@@ -48,7 +44,7 @@ export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ chil
 
   return (
     <CardContainer>
-      <Table<DataType> dataSource={vulnerabilities}>
+      <Table<DataType> dataSource={vulnerabilities} loading={isPending}>
         <Column title="Name" dataIndex="name" key="name" render={(name: string) => <Space>
           <Typography.Text>{name}</Typography.Text>
           {data?.dependencies[name]?.dev && <Tooltip title="This library is registered as a development dependency in: devDependencies"><Tag color="red">D</Tag></Tooltip>}
