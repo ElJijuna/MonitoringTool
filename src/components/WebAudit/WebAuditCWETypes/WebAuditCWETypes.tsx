@@ -2,16 +2,7 @@ import { useMemo, type FC, type ReactElement } from 'react';
 import { useWebAuditCWE } from '../hooks/useWebAuditCWE';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { CardContainer } from '../../CardContainer/CardContainer';
-
-const generateRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
+import { severityColor } from '../../../utils/severity/severity-color';
 
 export interface WebAuditCWETypesProps {
   user: string;
@@ -24,7 +15,7 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, 
   const [data] = useWebAuditCWE({ user, repository, application, commit });
   const values = useMemo<number[]>(() => Object.values(data.map(({ total }) => total)), [data]);
   const categories = useMemo(() => data.map(({ code }) => code), [data]);
-  const randomBarColors = useMemo(() => categories.map(() => generateRandomColor()), [categories]);
+  const colors = useMemo(() => data.map(({ severity }) => severityColor[severity]), [data]);
 
   return (
     <CardContainer>
@@ -50,19 +41,9 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, 
           colorMap: {
             type: 'ordinal',
             values: categories,
-            colors: randomBarColors,
+            colors,
           },
-          tickLabelInterval: () => true,
-          valueFormatter: (value) => value,
-          tickLabelStyle: {
-            angle: -90,
-            textAnchor: 'end',
-            fontSize: 8,
-            textOverflow: 'clip',
-          },
-          labelStyle: {
-            textOverflow: 'clip',
-          },
+          
           offset: 4,
         }]}
         margin={{ bottom: 4 }}
