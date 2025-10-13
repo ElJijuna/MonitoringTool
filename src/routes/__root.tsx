@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { useState, type FC, type ReactElement } from 'react';
-import { Layout } from 'antd';
+import { Flex, Layout } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ApplicationName } from '../components/SideBarMenu/ApplicationName/ApplicationName';
 import { SideBarMenu } from '../components/SideBarMenu/SideBarMenu';
@@ -8,6 +8,7 @@ import { Content } from 'antd/es/layout/layout';
 import { ApplicationFooter } from '../components/ApplicationFooter/ApplicationFooter';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { OwnersDropdown } from '../components/OwnersDropdown/OwnersDropdown';
 
 const siderStyle: React.CSSProperties = {
   overflow: 'auto',
@@ -27,6 +28,9 @@ const Root: FC = (): ReactElement => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={siderStyle}>
         <ApplicationName collapsed={collapsed} />
+        <Flex justify="flex-end">
+          <OwnersDropdown />
+        </Flex>
         <Content style={{ padding: 4 }}>
           <SideBarMenu collapsed={collapsed} />
         </Content>
