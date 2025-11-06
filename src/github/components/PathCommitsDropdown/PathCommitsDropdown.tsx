@@ -13,21 +13,31 @@ export interface PathCommitsDropdownProps {
 
 export const PathCommitsDropdown: FC<PathCommitsDropdownProps> = ({ user, repository, path, defaultSelected, onChange }): ReactElement => {
   const { data = [], isPending } = usePathCommits({ user, repository, path });
-  const [selected, setSelected] = useState<string | undefined>(defaultSelected);
+  const [selected, setSelected] = useState<string | undefined>();
   const items = useMemo(() => data.map(({ sha, commit: { author: { date } } }) => ({ label: sha.slice(0, 7) + '\t\t-\t\t' + new Date(date), key: sha, icon: <FaCodeCommit size={16} />, disabled: selected === sha })), [data, selected]);
 
   const onClickCallback = useCallback((value: string) => {
-      setSelected(value);
-      onChange?.(value);
-    }, []);
-  
-    useEffect(() => {
-      if (!defaultSelected && items.length > 0) {
-        setSelected(items[0].key);
-        onChange?.(items[0].key)
-      }
-    }, [items]);
-  
+    setSelected(value);
+    onChange?.(value);
+  }, []);
+
+  useEffect(() => {
+    if (!defaultSelected && items.length > 0) {
+      setSelected(items[0].key);
+      onChange?.(items[0].key);
+
+      return;
+    }
+
+    if (defaultSelected && items.length > 0) {
+      const value = items.find(({ key }) => key === defaultSelected);
+      const result = value?.key ?? items[0]?.key;
+
+      setSelected(result);
+      onChange?.(result);
+    }
+  }, [items]);
+
   return (
     <DropdownButton className="FontVariantTabular" menu={{ items, onClick: (e) => onClickCallback(e.key) }} placement="bottom" icon={<FaCodeCommit size={16} />} loading={isPending}>
       Version: <strong>{selected?.slice(0, 7)}</strong>
