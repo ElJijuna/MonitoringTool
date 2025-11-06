@@ -1,13 +1,14 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { useState, type FC, type ReactElement } from 'react';
-import { Layout } from 'antd';
+import { Layout, Space } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ApplicationName } from '../components/SideBarMenu/ApplicationName/ApplicationName';
 import { SideBarMenu } from '../components/SideBarMenu/SideBarMenu';
-import { Content } from 'antd/es/layout/layout';
+import { Content, Header } from 'antd/es/layout/layout';
 import { ApplicationFooter } from '../components/ApplicationFooter/ApplicationFooter';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { OwnerSelector } from '../components/OwnerSelector/OwnerSelector';
 
 const siderStyle: React.CSSProperties = {
   overflow: 'auto',
@@ -32,6 +33,9 @@ const Root: FC = (): ReactElement => {
         </Content>
       </Sider>
       <Layout>
+        <Header style={{ padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <OwnerSelector />
+        </Header>
         <Content>
           <Outlet />
         </Content>
