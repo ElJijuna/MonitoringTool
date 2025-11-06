@@ -1,8 +1,12 @@
-import { useMemo, type FC, type ReactElement } from 'react';
+import { useEffect, useMemo, useRef, type FC, type ReactElement } from 'react';
 import { useWebAuditCWE } from '../hooks/useWebAuditCWE';
-import { BarChart } from '@mui/x-charts/BarChart';
 import { CardContainer } from '../../CardContainer/CardContainer';
 import { severityColor } from '../../../utils/severity/severity-color';
+import { Chart } from 'chart.js';
+import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
+
+Chart.register(WordCloudController, WordElement);
+
 
 export interface WebAuditCWETypesProps {
   user: string;
@@ -17,42 +21,39 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, 
   const categories = useMemo(() => data.map(({ code }) => code), [data]);
   const colors = useMemo(() => data.map(({ severity }) => severityColor[severity]), [data]);
 
-  return (
-    <CardContainer>
-      <BarChart
-        hideLegend
-        borderRadius={4}
-        height={200}
-        series={[
-          {
-            data: values,
-            label: 'CWE',
-            type: 'bar',
-          },
-        ]}
-        yAxis={[{
-          offset: 4,
-          max: Math.max(...values),
-          domainLimit: 'strict',
-        }]}
-        xAxis={[{
-          scaleType: 'band',
-          data: categories,
-          colorMap: {
-            type: 'ordinal',
-            values: categories,
-            colors,
-          },
-          
-          offset: 4,
-        }]}
-        margin={{ bottom: 4 }}
-        sx={{
-          '.MuiChartsAxis-root .MuiChartsAxis-line': {
-            stroke: '#ccc',
-          },
-        }}
-      />
-    </CardContainer>
-  );
+  const chartRef = useRef<HTMLCanvasElement>(null);
+  const chartInstanceRef = useRef(null); // 👉 referencia al gráfico
+
+  useEffect(() => {
+    const ctx = chartRef.current?.getContext('2d');
+
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
+
+    chartInstanceRef.current = new Chart(ctx, {
+      type: 'wordCloud',
+      data: {
+        labels: categories,
+        datasets: [{
+          label: 'Word Cloud',
+          data: values
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Word Cloud Example'
+        }
+      }
+    });
+
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+      }
+    };
+  }, []);
+
+  return <CardContainer><canvas ref={chartRef} width={400} height={400} /></CardContainer>;
 };
