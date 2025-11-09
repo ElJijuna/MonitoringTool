@@ -1,6 +1,6 @@
 import { useMemo, type FC, type ReactElement } from 'react';
 import { useWebAuditCWE } from '../hooks/useWebAuditCWE';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { ResponsiveBar } from '@nivo/bar';
 import { CardContainer } from '../../CardContainer/CardContainer';
 import { severityColor } from '../../../utils/severity/severity-color';
 
@@ -13,46 +13,55 @@ export interface WebAuditCWETypesProps {
 
 export const WebAuditCWETypes: FC<Partial<WebAuditCWETypesProps>> = ({ user, repository, application, commit }: Partial<WebAuditCWETypesProps>): ReactElement => {
   const [data] = useWebAuditCWE({ user, repository, application, commit });
-  const values = useMemo<number[]>(() => Object.values(data.map(({ total }) => total)), [data]);
-  const categories = useMemo(() => data.map(({ code }) => code), [data]);
-  const colors = useMemo(() => data.map(({ severity }) => severityColor[severity]), [data]);
+  
+  const chartData = useMemo(() => 
+    data.map(({ code, total, severity }) => ({
+      code,
+      total,
+      severity,
+      color: severityColor[severity]
+    })), 
+    [data]
+  );
 
   return (
     <CardContainer>
-      <BarChart
-        hideLegend
-        borderRadius={4}
-        height={200}
-        series={[
-          {
-            data: values,
-            label: 'CWE',
-            type: 'bar',
-          },
-        ]}
-        yAxis={[{
-          offset: 4,
-          max: Math.max(...values),
-          domainLimit: 'strict',
-        }]}
-        xAxis={[{
-          scaleType: 'band',
-          data: categories,
-          colorMap: {
-            type: 'ordinal',
-            values: categories,
-            colors,
-          },
-
-          offset: 4,
-        }]}
-        margin={{ bottom: 4 }}
-        sx={{
-          '.MuiChartsAxis-root .MuiChartsAxis-line': {
-            stroke: '#ccc',
-          },
-        }}
-      />
+      <div style={{ height: '280px' }}>
+        <ResponsiveBar
+          data={chartData}
+          keys={['total']}
+          indexBy="code"
+          margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
+          padding={0.1}
+          valueScale={{ type: 'linear' }}
+          indexScale={{ type: 'band', round: true }}
+          colors={({ data }) => data.color}
+          borderRadius={4}
+          axisBottom={{
+            tickSize: 0,
+            tickPadding: 4,
+            tickRotation: 0,
+          }}
+          axisLeft={{
+            tickSize: 0,
+            tickPadding: 4,
+            tickRotation: 0,
+          }}
+          enableGridY={false}
+          enableLabel={false}
+          role="application"
+          ariaLabel="CWE vulnerability chart"
+          theme={{
+            axis: {
+              ticks: {
+                text: {
+                  fontSize: 8,
+                }
+              }
+            }
+          }}
+        />
+      </div>
     </CardContainer>
   );
 };
