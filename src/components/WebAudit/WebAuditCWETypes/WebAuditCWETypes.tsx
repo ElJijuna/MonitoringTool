@@ -11,7 +11,7 @@ export interface WebAuditCWETypesProps {
   commit: string;
 }
 
-export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, application, commit }: WebAuditCWETypesProps): ReactElement => {
+export const WebAuditCWETypes: FC<Partial<WebAuditCWETypesProps>> = ({ user, repository, application, commit }: Partial<WebAuditCWETypesProps>): ReactElement => {
   const [data] = useWebAuditCWE({ user, repository, application, commit });
   const values = useMemo<number[]>(() => Object.values(data.map(({ total }) => total)), [data]);
   const categories = useMemo(() => data.map(({ code }) => code), [data]);
@@ -43,7 +43,7 @@ export const WebAuditCWETypes: FC<WebAuditCWETypesProps> = ({ user, repository, 
             values: categories,
             colors,
           },
-          
+
           offset: 4,
         }]}
         margin={{ bottom: 4 }}

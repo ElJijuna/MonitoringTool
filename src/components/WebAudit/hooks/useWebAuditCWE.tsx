@@ -21,7 +21,7 @@ export const useWebAuditCWE = ({
   repository,
   application,
   commit,
-}: UseWebAuditCWEProps): [UseWebAuditCWE[]] => {
+}: Partial<UseWebAuditCWEProps>): [UseWebAuditCWE[]] => {
   const { data: report } = useWebAuditReport({
     user,
     repository,

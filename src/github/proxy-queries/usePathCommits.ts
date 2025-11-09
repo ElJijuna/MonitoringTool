@@ -8,7 +8,7 @@ export interface UsePathCommits {
   path: string;
 }
 
-export const usePathCommits = ({ user, repository, path }: UsePathCommits): UseQueryResult<GitHubCommits> => {
+export const usePathCommits = ({ user, repository, path }: Partial<UsePathCommits>): UseQueryResult<GitHubCommits> => {
   return useQuery({
     enabled: !!user && !!repository && !!path,
     queryKey: ['gh', 'commits', user, repository, path],

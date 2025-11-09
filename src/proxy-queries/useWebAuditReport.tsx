@@ -9,8 +9,9 @@ export interface UseWebAuditReportProps {
   commit: string;
 }
 
-export const useWebAuditReport = ({ user, repository, commit, application }: UseWebAuditReportProps): UseQueryResult<WebAuditReport> => {
+export const useWebAuditReport = ({ user, repository, commit, application }: Partial<UseWebAuditReportProps>): UseQueryResult<WebAuditReport> => {
   return useQuery({
+    enabled: !!user && !!repository && !!commit && !!application,
     queryKey: ['web-audit-report', user, repository, commit, application],
     staleTime: 1000 * 60 * 5,
     refetchInterval: 1000 * 60 * 5,

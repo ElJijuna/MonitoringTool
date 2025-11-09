@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { useState, type FC, type ReactElement } from 'react';
-import { Layout, Space } from 'antd';
+import { Layout } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ApplicationName } from '../components/SideBarMenu/ApplicationName/ApplicationName';
 import { SideBarMenu } from '../components/SideBarMenu/SideBarMenu';

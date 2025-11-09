@@ -7,7 +7,7 @@ export interface UseWebAuditDependenciesProps {
   commit: string;
 }
 
-export const useWebAuditDependencies = ({ user, repository, application, commit }: UseWebAuditDependenciesProps) => {
+export const useWebAuditDependencies = ({ user, repository, application, commit }: Partial<UseWebAuditDependenciesProps>) => {
   const { data: report } = useWebAuditReport({ user, repository, application, commit });
   const data = report?.dependencies;
 

@@ -1,7 +1,8 @@
 import { Select } from 'antd';
 import { useOwner } from '../../domain/owner/owner.store';
+import type { FC, ReactElement } from 'react';
 
-export const OwnerSelector = () => {
+export const OwnerSelector: FC = (): ReactElement => {
     const { owner, setOwner } = useOwner();
 
     const handleChange = (username: string) => {
@@ -21,6 +22,9 @@ export const OwnerSelector = () => {
             onChange={handleChange}
             options={[
                 { value: 'ElJijuna', label: 'ElJijuna' },
+                { value: 'ismae147', label: 'ismae147' },
+                { value: 'hashtagthis', label: 'hashtagthis' },
+                { value: 'renatomendozac', label: 'renatomendozac' },
                 // Add more options here as needed
             ]}
         />

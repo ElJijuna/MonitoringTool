@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Owner } from './owner';
+import type { Owner } from './owner';
 
 interface OwnerStore {
   owner: Owner | undefined;

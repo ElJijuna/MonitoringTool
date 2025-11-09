@@ -5,8 +5,8 @@ import { FaCodeBranch } from 'react-icons/fa6';
 
 export interface BranchesDropdownPops {
   defaultSelected?: string;
-  user: string;
-  repository: string;
+  user?: string;
+  repository?: string;
   onChange?: (value: string) => void;
 }
 

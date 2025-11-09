@@ -16,7 +16,7 @@ const formatter: StatisticProps['formatter'] = (value): ReactElement => (
   <CountUp end={value as number} separator="," />
 );
 
-export const TotalDependencies: FC<TotalDependenciesProps> = ({ user, repository, application, commit, dev }): ReactElement => {
+export const TotalDependencies: FC<Partial<TotalDependenciesProps>> = ({ user, repository, application, commit, dev }): ReactElement => {
   const [dependencies = {}] = useWebAuditDependencies({ user, repository, application, commit });
   const total = useMemo(() => dev ? Object.values(dependencies).filter(({ dev }) => dev).length : Object.values(dependencies).length, [dependencies]);
 
