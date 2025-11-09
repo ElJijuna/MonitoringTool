@@ -8,17 +8,17 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/__root'
-import { Route as UsersRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/users'
-import { Route as ApplicationsRouteRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/route'
-import { Route as IndexRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/index'
-import { Route as ApplicationsIndexRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/index'
-import { Route as ApplicationsAppIdRouteRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/route'
-import { Route as ApplicationsAppIdIndexRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/index'
-import { Route as ApplicationsAppIdScansRouteRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/scans/route'
-import { Route as ApplicationsAppIdScansIndexRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/scans/index'
-import { Route as ApplicationsAppIdScansWebAuditRouteRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/scans/web-audit/route'
-import { Route as ApplicationsAppIdScansWebAuditIndexRouteImport } from '/Users/ismael/Documents/MonitoringTool/src/routes/applications/$appId/scans/web-audit/index'
+import { Route as rootRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/__root'
+import { Route as UsersRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/users'
+import { Route as ApplicationsRouteRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/route'
+import { Route as IndexRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/index'
+import { Route as ApplicationsIndexRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/index'
+import { Route as ApplicationsAppIdRouteRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/route'
+import { Route as ApplicationsAppIdIndexRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/index'
+import { Route as ApplicationsAppIdScansRouteRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/scans/route'
+import { Route as ApplicationsAppIdScansIndexRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/scans/index'
+import { Route as ApplicationsAppIdScansWebAuditRouteRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit/route'
+import { Route as ApplicationsAppIdScansWebAuditIndexRouteImport } from '/home/pilmee/Documentos/GitHub/MonitoringTool/src/routes/applications/$appId/scans/web-audit/index'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
@@ -111,36 +111,36 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/applications'
-    | '/users'
-    | '/applications/$appId'
-    | '/applications/'
-    | '/applications/$appId/scans'
-    | '/applications/$appId/'
-    | '/applications/$appId/scans/web-audit'
-    | '/applications/$appId/scans/'
-    | '/applications/$appId/scans/web-audit/'
+  | '/'
+  | '/applications'
+  | '/users'
+  | '/applications/$appId'
+  | '/applications/'
+  | '/applications/$appId/scans'
+  | '/applications/$appId/'
+  | '/applications/$appId/scans/web-audit'
+  | '/applications/$appId/scans/'
+  | '/applications/$appId/scans/web-audit/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/users'
-    | '/applications'
-    | '/applications/$appId'
-    | '/applications/$appId/scans'
-    | '/applications/$appId/scans/web-audit'
+  | '/'
+  | '/users'
+  | '/applications'
+  | '/applications/$appId'
+  | '/applications/$appId/scans'
+  | '/applications/$appId/scans/web-audit'
   id:
-    | '__root__'
-    | '/'
-    | '/applications'
-    | '/users'
-    | '/applications/$appId'
-    | '/applications/'
-    | '/applications/$appId/scans'
-    | '/applications/$appId/'
-    | '/applications/$appId/scans/web-audit'
-    | '/applications/$appId/scans/'
-    | '/applications/$appId/scans/web-audit/'
+  | '__root__'
+  | '/'
+  | '/applications'
+  | '/users'
+  | '/applications/$appId'
+  | '/applications/'
+  | '/applications/$appId/scans'
+  | '/applications/$appId/'
+  | '/applications/$appId/scans/web-audit'
+  | '/applications/$appId/scans/'
+  | '/applications/$appId/scans/web-audit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -229,10 +229,10 @@ interface ApplicationsAppIdScansWebAuditRouteRouteChildren {
 }
 
 const ApplicationsAppIdScansWebAuditRouteRouteChildren: ApplicationsAppIdScansWebAuditRouteRouteChildren =
-  {
-    ApplicationsAppIdScansWebAuditIndexRoute:
-      ApplicationsAppIdScansWebAuditIndexRoute,
-  }
+{
+  ApplicationsAppIdScansWebAuditIndexRoute:
+    ApplicationsAppIdScansWebAuditIndexRoute,
+}
 
 const ApplicationsAppIdScansWebAuditRouteRouteWithChildren =
   ApplicationsAppIdScansWebAuditRouteRoute._addFileChildren(
@@ -245,11 +245,11 @@ interface ApplicationsAppIdScansRouteRouteChildren {
 }
 
 const ApplicationsAppIdScansRouteRouteChildren: ApplicationsAppIdScansRouteRouteChildren =
-  {
-    ApplicationsAppIdScansWebAuditRouteRoute:
-      ApplicationsAppIdScansWebAuditRouteRouteWithChildren,
-    ApplicationsAppIdScansIndexRoute: ApplicationsAppIdScansIndexRoute,
-  }
+{
+  ApplicationsAppIdScansWebAuditRouteRoute:
+    ApplicationsAppIdScansWebAuditRouteRouteWithChildren,
+  ApplicationsAppIdScansIndexRoute: ApplicationsAppIdScansIndexRoute,
+}
 
 const ApplicationsAppIdScansRouteRouteWithChildren =
   ApplicationsAppIdScansRouteRoute._addFileChildren(
@@ -262,11 +262,11 @@ interface ApplicationsAppIdRouteRouteChildren {
 }
 
 const ApplicationsAppIdRouteRouteChildren: ApplicationsAppIdRouteRouteChildren =
-  {
-    ApplicationsAppIdScansRouteRoute:
-      ApplicationsAppIdScansRouteRouteWithChildren,
-    ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
-  }
+{
+  ApplicationsAppIdScansRouteRoute:
+    ApplicationsAppIdScansRouteRouteWithChildren,
+  ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
+}
 
 const ApplicationsAppIdRouteRouteWithChildren =
   ApplicationsAppIdRouteRoute._addFileChildren(

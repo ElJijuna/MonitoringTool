@@ -1,32 +1,46 @@
-import { Select } from 'antd';
-import { useOwner } from '../../domain/owner/owner.store';
-import type { FC, ReactElement } from 'react';
+import { Select, Space, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useState, type FC, type ReactElement } from 'react';
+import { useOwnersStore } from '../../stores/owners.store';
+import { OwnerManager } from '../OwnerManager/OwnerManager';
 
 export const OwnerSelector: FC = (): ReactElement => {
-    const { owner, setOwner } = useOwner();
+    const { owners, selectedOwner, setSelectedOwner } = useOwnersStore();
+    const [isManagerOpen, setIsManagerOpen] = useState(false);
 
     const handleChange = (username: string) => {
-        setOwner({
-            username,
-            repositories: {
-                monitoringTool: 'MonitoringTool',
-                database: 'MonitoringTool-DB'
-            }
-        });
+        setSelectedOwner(username);
     };
 
     return (
-        <Select
-            style={{ width: 200 }}
-            value={owner?.username}
-            onChange={handleChange}
-            options={[
-                { value: 'ElJijuna', label: 'ElJijuna' },
-                { value: 'ismae147', label: 'ismae147' },
-                { value: 'hashtagthis', label: 'hashtagthis' },
-                { value: 'renatomendozac', label: 'renatomendozac' },
-                // Add more options here as needed
-            ]}
-        />
-    );
+        <Space.Compact style={{ width: '100%' }}>
+            <Select
+                style={{ width: 'calc(100% - 32px)' }}
+                value={selectedOwner}
+                onChange={handleChange}
+                optionLabelProp="label"
+                optionFilterProp="label"
+                showSearch
+                options={owners.map(owner => ({
+                    value: owner,
+                    label: owner,
+                }))}
+                listHeight={256}
+                maxTagCount={1}
+                placement="bottomLeft"
+                popupMatchSelectWidth={false}
+                dropdownStyle={{
+                    minWidth: '200px',
+                    maxWidth: '300px'
+                }}
+            />
+            <Button
+                icon={<PlusOutlined />}
+                onClick={() => setIsManagerOpen(true)}
+            />
+            <OwnerManager
+                open={isManagerOpen}
+                onClose={() => setIsManagerOpen(false)}
+            />
+        </Space.Compact>);
 };
