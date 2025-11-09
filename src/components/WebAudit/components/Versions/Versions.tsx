@@ -11,7 +11,7 @@ export interface VersionsProps {
   app?: 'node' | 'npm' | 'v8'
 }
 
-export const Versions: FC<VersionsProps> = ({ user, repository, application, commit, app = 'node' }): ReactElement => {
+export const Versions: FC<Partial<VersionsProps>> = ({ user, repository, application, commit, app = 'node' }): ReactElement => {
   const { data } = useWebAuditReport({ user, repository, application, commit });
 
   return (

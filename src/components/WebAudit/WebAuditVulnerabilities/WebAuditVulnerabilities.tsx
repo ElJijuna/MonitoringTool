@@ -26,7 +26,7 @@ export interface WebAuditVulnerabilitiesProps extends PropsWithChildren {
   commit: string;
 }
 
-export const WebAuditVulnerabilities: FC<WebAuditVulnerabilitiesProps> = ({ children, user, repository, commit, application }): ReactElement => {
+export const WebAuditVulnerabilities: FC<Partial<WebAuditVulnerabilitiesProps>> = ({ children, user, repository, commit, application }): ReactElement => {
   const [open, setOpen] = useState(false);
   const [dependency, setDependency] = useState('');
   const { data, isPending } = useWebAuditReport({ user, repository, commit, application });

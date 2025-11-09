@@ -7,7 +7,7 @@ export interface UseBranches {
   repository: string;
 }
 
-export const useBranches = ({ user, repository }: UseBranches): UseQueryResult<GitHubBranches> => {
+export const useBranches = ({ user, repository }: Partial<UseBranches>): UseQueryResult<GitHubBranches> => {
   return useQuery({
     enabled: !!user && !!repository,
     queryKey: ['gh', 'branches', user, repository],

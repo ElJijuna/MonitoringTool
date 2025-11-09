@@ -12,9 +12,12 @@ export interface WebAuditDependencyProps {
   packageName: string;
 }
 
-export const WebAuditDependency: FC<WebAuditDependencyProps> = ({ user, repository, commit, application, packageName }): ReactElement => {
+export const WebAuditDependency: FC<Partial<WebAuditDependencyProps>> = ({ user, repository, commit, application, packageName }): ReactElement => {
   const { data, isPending } = useWebAuditReport({ user, repository, commit, application });
-  const vulnerability = useMemo(() => data?.vulnerabilities[packageName], [data]);
+  const vulnerability = useMemo(() => {
+    if (!packageName) return undefined;
+    return data?.vulnerabilities[packageName];
+  }, [data, packageName]);
 
   if (isPending || !vulnerability) {
     return <>Loading</>;
@@ -22,36 +25,36 @@ export const WebAuditDependency: FC<WebAuditDependencyProps> = ({ user, reposito
 
   return (
     <Flex vertical gap={10}>
-    <Descriptions
-      title="📋 Vulnerable Package Summary"
-      bordered
-      column={1}
-      size="middle"
-    >
-      <Descriptions.Item label="📦 Package">
-        {vulnerability.name}
-      </Descriptions.Item>
-      <Descriptions.Item label="⚠️ Severity">
-        <Tag color={severityColor[vulnerability.severity]}>{severityText[vulnerability.severity]}</Tag>
-      </Descriptions.Item>
-      <Descriptions.Item label="🔗 Direct Dependency">
-        {vulnerability.isDirect ? 'Yes' : 'No'}
-      </Descriptions.Item>
-      <Descriptions.Item label="🧩 Affected by">
-        {vulnerability.via.length} packages
-      </Descriptions.Item>
-      <Descriptions.Item label="📁 Location">
-        <Flex vertical>
-          {vulnerability.nodes.map((node) => <Typography.Text>{node}</Typography.Text>)}
-        </Flex>
-      </Descriptions.Item>
-      <Descriptions.Item label="📊 Affected range">
-        <Tag>{vulnerability.range}</Tag>
-      </Descriptions.Item>
-      <Descriptions.Item label="✅ Fix available">
-        {JSON.stringify(vulnerability.fixAvailable)}
-      </Descriptions.Item>
-    </Descriptions>
+      <Descriptions
+        title="📋 Vulnerable Package Summary"
+        bordered
+        column={1}
+        size="middle"
+      >
+        <Descriptions.Item label="📦 Package">
+          {vulnerability.name}
+        </Descriptions.Item>
+        <Descriptions.Item label="⚠️ Severity">
+          <Tag color={severityColor[vulnerability.severity]}>{severityText[vulnerability.severity]}</Tag>
+        </Descriptions.Item>
+        <Descriptions.Item label="🔗 Direct Dependency">
+          {vulnerability.isDirect ? 'Yes' : 'No'}
+        </Descriptions.Item>
+        <Descriptions.Item label="🧩 Affected by">
+          {vulnerability.via.length} packages
+        </Descriptions.Item>
+        <Descriptions.Item label="📁 Location">
+          <Flex vertical>
+            {vulnerability.nodes.map((node) => <Typography.Text>{node}</Typography.Text>)}
+          </Flex>
+        </Descriptions.Item>
+        <Descriptions.Item label="📊 Affected range">
+          <Tag>{vulnerability.range}</Tag>
+        </Descriptions.Item>
+        <Descriptions.Item label="✅ Fix available">
+          {JSON.stringify(vulnerability.fixAvailable)}
+        </Descriptions.Item>
+      </Descriptions>
     </Flex>
   );
 }

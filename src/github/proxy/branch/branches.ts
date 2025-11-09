@@ -2,12 +2,16 @@ import type { GitHubBranches } from '../../domain/branch';
 
 export interface GetBranchesProps {
   signal: AbortSignal;
-  user: string;
-  repository: string;
+  user?: string;
+  repository?: string;
 }
 
 export const getBranches = async ({ signal, user, repository }: GetBranchesProps): Promise<GitHubBranches> => {
   try {
+    if (!user || !repository) {
+      throw new Error('User and repository are required parameters.');
+    }
+
     const query = new URLSearchParams({});
     const response = await fetch(`${import.meta.env.VITE_APP_GITHUB_API_URL}/repos/${user}/${repository}/branches?${query}`, { signal });
 
@@ -16,7 +20,7 @@ export const getBranches = async ({ signal, user, repository }: GetBranchesProps
     }
 
     const data = await response.json();
-  
+
     return data;
   } catch (error) {
     console.error('Error fetching branches:', error);

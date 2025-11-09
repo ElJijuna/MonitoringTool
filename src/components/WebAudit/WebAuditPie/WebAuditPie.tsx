@@ -12,7 +12,7 @@ export interface WebAuditPieProps extends PropsWithChildren {
   commit: string;
 }
 
-export const WebAuditPie: FC<WebAuditPieProps> = ({ user, repository, commit, application }): ReactElement => {
+export const WebAuditPie: FC<Partial<WebAuditPieProps>> = ({ user, repository, commit, application }): ReactElement => {
   const { data: report, isPending } = useWebAuditReport({ user, repository, commit, application });
   const data = useMemo(() => [{ label: severityText.critical, value: report?.metadata.vulnerabilities.critical ?? 0, color: severityColor.critical }, { label: severityText.high, value: report?.metadata.vulnerabilities.high ?? 0, color: severityColor.high }, { label: severityText.moderate, value: report?.metadata.vulnerabilities.moderate ?? 0, color: severityColor.moderate }, { label: severityText.low, value: report?.metadata.vulnerabilities.low ?? 0, color: severityColor.low }, { label: severityText.info, value: report?.metadata.vulnerabilities.info ?? 0, color: severityColor.info }], [report]);
 

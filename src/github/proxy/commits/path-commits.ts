@@ -3,13 +3,17 @@ import type { GitHubCommits } from '../../domain/commit';
 
 export interface GetPathCommitsProps {
   signal: AbortSignal;
-  user: string;
-  repository: string;
-  path: string;
+  user?: string;
+  repository?: string;
+  path?: string;
 }
 
 export const getPathCommits = async ({ signal, user, repository, path }: GetPathCommitsProps): Promise<GitHubCommits> => {
   try {
+    if (!user || !repository || !path) {
+      throw new Error('User, repository, and path are required parameters.');
+    }
+
     const query = new URLSearchParams({
       path
     });
@@ -20,7 +24,7 @@ export const getPathCommits = async ({ signal, user, repository, path }: GetPath
     }
 
     const data = await response.json();
-  
+
     return data;
   } catch (error) {
     console.error('Error fetching commits:', error);

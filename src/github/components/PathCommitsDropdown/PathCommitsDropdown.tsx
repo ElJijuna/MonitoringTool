@@ -5,9 +5,9 @@ import { FaCodeCommit } from 'react-icons/fa6';
 
 export interface PathCommitsDropdownProps {
   defaultSelected?: string;
-  user: string;
-  repository: string;
-  path: string;
+  user?: string;
+  repository?: string;
+  path?: string;
   onChange?: (value: string) => void;
 }
 
@@ -24,17 +24,7 @@ export const PathCommitsDropdown: FC<PathCommitsDropdownProps> = ({ user, reposi
   useEffect(() => {
     if (!defaultSelected && items.length > 0) {
       setSelected(items[0].key);
-      onChange?.(items[0].key);
-
-      return;
-    }
-
-    if (defaultSelected && items.length > 0) {
-      const value = items.find(({ key }) => key === defaultSelected);
-      const result = value?.key ?? items[0]?.key;
-
-      setSelected(result);
-      onChange?.(result);
+      onChange?.(items[0].key)
     }
   }, [items]);
 

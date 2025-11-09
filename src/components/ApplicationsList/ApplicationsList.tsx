@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router';
 import { useRepositories } from '../../proxy-queries/useRepositories';
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
 import { CardContainer } from '../CardContainer/CardContainer';
+import { useOwner } from '../../domain/owner/owner.store';
 
 const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   <Space>
@@ -18,7 +19,8 @@ export interface ApplicationsListProps extends PropsWithChildren {
 }
 
 export const ApplicationsList: FC<ApplicationsListProps> = ({ children, filter }: ApplicationsListProps): ReactElement => {
-  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna', filter });
+  const { owner } = useOwner();
+  const { data: applications, isPending } = useRepositories({ user: owner?.username ?? '', filter });
 
   if (isPending) {
     return <div>Loading...</div>;

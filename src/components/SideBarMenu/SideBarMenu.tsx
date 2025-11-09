@@ -5,6 +5,7 @@ import Menu from 'antd/es/menu/menu';
 import { useRepositories } from '../../proxy-queries/useRepositories';
 import { Spin } from 'antd';
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
+import { useOwner } from '../../domain/owner/owner.store';
 
 export interface SideBarMenuProps extends PropsWithChildren {
   collapsed?: boolean;
@@ -14,8 +15,9 @@ export const SideBarMenu: FC<SideBarMenuProps> = (): ReactElement => {
   const navigate = useNavigate();
   const router = useRouter();
   const currentPath = router.state.location.pathname;
-  const { data: applications, isPending } = useRepositories({ user: 'ElJijuna' });
-  
+  const { owner } = useOwner();
+  const { data: applications, isPending } = useRepositories({ user: owner?.username ?? '' });
+
   const handleClick = useCallback(({ key }: { key: string }) => {
     navigate({ to: key })
   }, []);
@@ -36,10 +38,10 @@ export const SideBarMenu: FC<SideBarMenuProps> = (): ReactElement => {
         key: `/applications/${name}`,
         label: name,
         children: [{
-          key:  `/applications/${name}/scans`,
+          key: `/applications/${name}/scans`,
           label: 'Scans',
           children: [
-            { 
+            {
               key: `/applications/${name}/scans/web-audit`,
               label: 'Web Audit'
             }
