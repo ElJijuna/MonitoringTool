@@ -27,7 +27,7 @@ const OwnerCard: FC<{ username: string }> = ({ username }): ReactElement => {
       actions={[
         <AppstoreOutlined key="apps" onClick={handleApplicationsClick} />,
         <GithubOutlined key="github" onClick={() => window.open(`https://github.com/${username}`, '_blank')} />,
-        owner.blog && <GlobalOutlined key="website" onClick={() => window.open(owner.blog, '_blank')} />
+        owner.blog && <GlobalOutlined key="website" onClick={() => window.open(owner.blog!, '_blank')} />
       ].filter(Boolean)}
     >
       <Card.Meta

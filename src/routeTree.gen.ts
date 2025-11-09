@@ -111,36 +111,36 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-  | '/'
-  | '/applications'
-  | '/users'
-  | '/applications/$appId'
-  | '/applications/'
-  | '/applications/$appId/scans'
-  | '/applications/$appId/'
-  | '/applications/$appId/scans/web-audit'
-  | '/applications/$appId/scans/'
-  | '/applications/$appId/scans/web-audit/'
+    | '/'
+    | '/applications'
+    | '/users'
+    | '/applications/$appId'
+    | '/applications/'
+    | '/applications/$appId/scans'
+    | '/applications/$appId/'
+    | '/applications/$appId/scans/web-audit'
+    | '/applications/$appId/scans/'
+    | '/applications/$appId/scans/web-audit/'
   fileRoutesByTo: FileRoutesByTo
   to:
-  | '/'
-  | '/users'
-  | '/applications'
-  | '/applications/$appId'
-  | '/applications/$appId/scans'
-  | '/applications/$appId/scans/web-audit'
+    | '/'
+    | '/users'
+    | '/applications'
+    | '/applications/$appId'
+    | '/applications/$appId/scans'
+    | '/applications/$appId/scans/web-audit'
   id:
-  | '__root__'
-  | '/'
-  | '/applications'
-  | '/users'
-  | '/applications/$appId'
-  | '/applications/'
-  | '/applications/$appId/scans'
-  | '/applications/$appId/'
-  | '/applications/$appId/scans/web-audit'
-  | '/applications/$appId/scans/'
-  | '/applications/$appId/scans/web-audit/'
+    | '__root__'
+    | '/'
+    | '/applications'
+    | '/users'
+    | '/applications/$appId'
+    | '/applications/'
+    | '/applications/$appId/scans'
+    | '/applications/$appId/'
+    | '/applications/$appId/scans/web-audit'
+    | '/applications/$appId/scans/'
+    | '/applications/$appId/scans/web-audit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -229,10 +229,10 @@ interface ApplicationsAppIdScansWebAuditRouteRouteChildren {
 }
 
 const ApplicationsAppIdScansWebAuditRouteRouteChildren: ApplicationsAppIdScansWebAuditRouteRouteChildren =
-{
-  ApplicationsAppIdScansWebAuditIndexRoute:
-    ApplicationsAppIdScansWebAuditIndexRoute,
-}
+  {
+    ApplicationsAppIdScansWebAuditIndexRoute:
+      ApplicationsAppIdScansWebAuditIndexRoute,
+  }
 
 const ApplicationsAppIdScansWebAuditRouteRouteWithChildren =
   ApplicationsAppIdScansWebAuditRouteRoute._addFileChildren(
@@ -245,11 +245,11 @@ interface ApplicationsAppIdScansRouteRouteChildren {
 }
 
 const ApplicationsAppIdScansRouteRouteChildren: ApplicationsAppIdScansRouteRouteChildren =
-{
-  ApplicationsAppIdScansWebAuditRouteRoute:
-    ApplicationsAppIdScansWebAuditRouteRouteWithChildren,
-  ApplicationsAppIdScansIndexRoute: ApplicationsAppIdScansIndexRoute,
-}
+  {
+    ApplicationsAppIdScansWebAuditRouteRoute:
+      ApplicationsAppIdScansWebAuditRouteRouteWithChildren,
+    ApplicationsAppIdScansIndexRoute: ApplicationsAppIdScansIndexRoute,
+  }
 
 const ApplicationsAppIdScansRouteRouteWithChildren =
   ApplicationsAppIdScansRouteRoute._addFileChildren(
@@ -262,11 +262,11 @@ interface ApplicationsAppIdRouteRouteChildren {
 }
 
 const ApplicationsAppIdRouteRouteChildren: ApplicationsAppIdRouteRouteChildren =
-{
-  ApplicationsAppIdScansRouteRoute:
-    ApplicationsAppIdScansRouteRouteWithChildren,
-  ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
-}
+  {
+    ApplicationsAppIdScansRouteRoute:
+      ApplicationsAppIdScansRouteRouteWithChildren,
+    ApplicationsAppIdIndexRoute: ApplicationsAppIdIndexRoute,
+  }
 
 const ApplicationsAppIdRouteRouteWithChildren =
   ApplicationsAppIdRouteRoute._addFileChildren(

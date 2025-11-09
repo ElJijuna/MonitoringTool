@@ -1,4 +1,5 @@
 export interface Owner {
+  username: string;
   login: string;
   id: number;
   node_id: string;
