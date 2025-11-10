@@ -1,6 +1,6 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router';
-
 import { routeTree } from './routeTree.gen';
+import ReloadPrompt from './components/ReloadPrompt/ReloadPrompt';
 import type { FC } from 'react';
 
 const router = createRouter({
@@ -8,9 +8,12 @@ const router = createRouter({
   routeTree,
 })
 
-const App: FC =() => {
+const App: FC = () => {
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <ReloadPrompt />
+    </>
   );
 }
 
