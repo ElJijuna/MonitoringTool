@@ -5,6 +5,7 @@ import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { githubPagesSpa } from '@sctg/vite-plugin-github-pages-spa';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
   const envs = loadEnv(mode, process.cwd());
@@ -33,6 +34,33 @@ export default defineConfig(({ mode }) => {
             dest: resolve(__dirname, 'docs')
           }
         ]
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+        manifest: {
+          name: 'Monitoring Tool',
+          short_name: 'MonitoringTool',
+          description: 'A monitoring tool for your applications',
+          theme_color: '#ffffff',
+          background_color: '#ffffff',
+          icons: [
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png'
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable'
+            }
+          ]
+        },
+        workbox: {
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024 // 5MB
+        }
       })
     ],
     resolve: {
