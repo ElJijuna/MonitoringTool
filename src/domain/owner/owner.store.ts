@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import type { Owner } from './owner';
 
 interface OwnerStore {
-  owner: Owner | undefined;
+  owner: Partial<Owner> | undefined;
   setOwner: (owner: Owner) => void;
   clear: () => void;
 }

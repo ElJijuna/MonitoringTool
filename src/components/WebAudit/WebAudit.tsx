@@ -29,10 +29,10 @@ export const WebAudit: FC<WebAuditProps> = ({ children }) => {
         <Col span={24}>
           <Flex justify="space-between">
             <Flex justify="flex-start" gap={10} style={{ display: 'inline-flex' }}>
-              <BranchesDropdown user={owner?.username} repository={owner?.repositories.database} defaultSelected={filters.branch} onChange={(branch) => {
+              <BranchesDropdown user={owner?.username} repository={owner?.repositories?.database} defaultSelected={filters.branch} onChange={(branch) => {
                 setFilters({ branch })
               }} />
-              <PathCommitsDropdown user={owner?.username} repository={owner?.repositories.database} path={appId + '--web-audit.json'} defaultSelected={filters.commit} onChange={(commit) => {
+              <PathCommitsDropdown user={owner?.username} repository={owner?.repositories?.database} path={appId + '--web-audit.json'} defaultSelected={filters.commit} onChange={(commit) => {
                 setFilters({ commit })
               }} />
             </Flex>
@@ -53,32 +53,32 @@ export const WebAudit: FC<WebAuditProps> = ({ children }) => {
       </Row>
       <Row gutter={10} style={{ marginTop: 10 }}>
         <Col span={4}>
-          <TotalDependencies user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} />
+          <TotalDependencies user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} />
         </Col>
         <Col span={4}>
-          <TotalDependencies user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} dev />
+          <TotalDependencies user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} dev />
         </Col>
         <Col span={3} offset={4}>
-          <Versions user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} />
+          <Versions user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} />
         </Col>
         <Col span={3}>
-          <Versions user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} app="npm" />
+          <Versions user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} app="npm" />
         </Col>
         <Col span={6}>
-          <Versions user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} app="v8" />
+          <Versions user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} app="v8" />
         </Col>
       </Row>
       <Row gutter={10} style={{ marginTop: 10 }}>
         <Col span={15}>
-          <WebAuditCWETypes user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} />
+          <WebAuditCWETypes user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} />
         </Col>
         <Col span={9}>
-          <WebAuditPie user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} />
+          <WebAuditPie user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} />
         </Col>
       </Row>
       <Row style={{ marginTop: 10 }}>
         <Col span={24}>
-          <WebAuditVulnerabilities user={owner?.username} repository={owner?.repositories.database} commit={filters.commit} application={appId} />
+          <WebAuditVulnerabilities user={owner?.username} repository={owner?.repositories?.database} commit={filters.commit} application={appId} />
         </Col>
       </Row>
       {children}

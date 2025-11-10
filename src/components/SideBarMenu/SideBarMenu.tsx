@@ -1,11 +1,11 @@
 import { useCallback, type FC, type PropsWithChildren, type ReactElement } from 'react';
-import { PieChartOutlined } from '@ant-design/icons';
+import { HomeOutlined, PieChartOutlined } from '@ant-design/icons';
 import { useNavigate, useRouter } from '@tanstack/react-router';
 import Menu from 'antd/es/menu/menu';
 import { useRepositories } from '../../proxy-queries/useRepositories';
 import { Spin } from 'antd';
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
-import { useOwner } from '../../domain/owner/owner.store';
+import { useSelectedOwner } from '../../hooks/useSelectedOwner';
 
 export interface SideBarMenuProps extends PropsWithChildren {
   collapsed?: boolean;
@@ -15,8 +15,8 @@ export const SideBarMenu: FC<SideBarMenuProps> = (): ReactElement => {
   const navigate = useNavigate();
   const router = useRouter();
   const currentPath = router.state.location.pathname;
-  const { owner } = useOwner();
-  const { data: applications, isPending } = useRepositories({ user: owner?.username ?? '' });
+  const { owner } = useSelectedOwner();
+  const { data: applications, isPending } = useRepositories({ user: owner?.login ?? '' });
 
   const handleClick = useCallback(({ key }: { key: string }) => {
     navigate({ to: key })
@@ -29,6 +29,11 @@ export const SideBarMenu: FC<SideBarMenuProps> = (): ReactElement => {
   }
 
   return <Menu onClick={handleClick} theme="dark" defaultSelectedKeys={[currentPath]} items={[
+    {
+      key: '/',
+      label: 'Home',
+      icon: <HomeOutlined />,
+    },
     {
       key: '/applications',
       icon: <PieChartOutlined />,

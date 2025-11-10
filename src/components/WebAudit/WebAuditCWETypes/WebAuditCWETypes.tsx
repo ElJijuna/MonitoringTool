@@ -13,14 +13,14 @@ export interface WebAuditCWETypesProps {
 
 export const WebAuditCWETypes: FC<Partial<WebAuditCWETypesProps>> = ({ user, repository, application, commit }: Partial<WebAuditCWETypesProps>): ReactElement => {
   const [data] = useWebAuditCWE({ user, repository, application, commit });
-  
-  const chartData = useMemo(() => 
+
+  const chartData = useMemo(() =>
     data.map(({ code, total, severity }) => ({
       code,
       total,
       severity,
       color: severityColor[severity]
-    })), 
+    })),
     [data]
   );
 
@@ -35,7 +35,7 @@ export const WebAuditCWETypes: FC<Partial<WebAuditCWETypesProps>> = ({ user, rep
           padding={0.1}
           valueScale={{ type: 'linear' }}
           indexScale={{ type: 'band', round: true }}
-          colors={({ data }) => data.color}
+          colors={({ data }: { data: { color: string } }) => data.color}
           borderRadius={4}
           axisBottom={{
             tickSize: 0,
