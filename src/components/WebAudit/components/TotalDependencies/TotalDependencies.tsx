@@ -22,7 +22,7 @@ export const TotalDependencies: FC<Partial<TotalDependenciesProps>> = ({ user, r
 
   return (
     <CardContainer style={{ paddingLeft: 14, paddingRight: 14 }}>
-      <Statistic title={`${dev ? 'Dev' : ''} Dependencies`} value={total} formatter={formatter} />
+      <Statistic title={`${dev ? 'Dev' : 'Prod'} Dependencies`} value={total} formatter={formatter} />
     </CardContainer>
   )
 };

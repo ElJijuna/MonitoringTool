@@ -27,14 +27,6 @@ export default defineConfig(({ mode }) => {
       githubPagesSpa({
         verbose: true,
       }),
-      viteStaticCopy({
-        targets: [
-          {
-            src: resolve(__dirname, 'dist/*'),
-            dest: resolve(__dirname, 'docs')
-          }
-        ]
-      }),
       VitePWA({
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
@@ -61,7 +53,15 @@ export default defineConfig(({ mode }) => {
         workbox: {
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024 // 5MB
         }
-      })
+      }),
+            viteStaticCopy({
+        targets: [
+          {
+            src: resolve(__dirname, 'dist/*'),
+            dest: resolve(__dirname, 'docs')
+          }
+        ]
+      }),
     ],
     resolve: {
       alias: {
