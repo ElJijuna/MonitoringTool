@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024 // 5MB
         }
       }),
-          ],
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
