@@ -18,11 +18,11 @@ export default defineConfig(({ mode }) => {
         importRoutesUsingAbsolutePaths: true
       }),
       react(),
-      mockDevServerPlugin({
+      ...(mode === 'development' ? [mockDevServerPlugin({
         prefix: '/api',
         log: 'debug',
         cors: false,
-      }),
+      })] : []),
       githubPagesSpa({
         verbose: true,
       }),
@@ -50,8 +50,12 @@ export default defineConfig(({ mode }) => {
           ]
         },
         workbox: {
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024 // 5MB
-        }
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        },
+        devOptions: {
+          enabled: true,
+        },
       }),
     ],
     resolve: {
