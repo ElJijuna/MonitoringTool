@@ -1,0 +1,15 @@
+name: TypeDoc
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ElJijuna/typedoc-action@v1
+        with:
+          token: ${{ secrets.MONITORING_TOOL_DB }}
